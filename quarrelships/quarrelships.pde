@@ -23,3 +23,10 @@ void mouseClicked() {
   }
   btn2.tryClick(mouseX, mouseY);
 }
+
+void keyPressed() {
+  switch(key) {
+    case 'r':
+      break;
+  }
+}
