@@ -26,6 +26,29 @@ public class GameMaster {
     println(currentTurn);
   }
   
+  public void checkClick() {
+    Cell clickedCell = null;
+    
+    switch(currentTurn) {
+      case PLAYER1SETUP:
+        clickedCell = board1.getCellAtMousePos();
+        break;
+      case PLAYER2SETUP:
+        clickedCell = board2.getCellAtMousePos();
+        break;
+      case PLAYER1TURN:
+        clickedCell = board2.getCellAtMousePos();
+        break;
+      case PLAYER2TURN:
+        clickedCell = board1.getCellAtMousePos();
+        break;
+    }
+    
+    if (clickedCell == null)
+      return;
+    println(clickedCell.getConvertedX() + ", " + clickedCell.getConvertedY());
+  }
+  
   public void render() {
     String displayTurn = "";
     
