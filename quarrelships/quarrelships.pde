@@ -28,6 +28,7 @@ void mouseClicked() {
 void keyPressed() {
   switch(key) {
     case 'r':
+      gm.rotateActiveShip();
       break;
   }
 }
