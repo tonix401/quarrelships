@@ -9,10 +9,19 @@ class ShipBlock {
     this.isSunk = false;
   }
   
-  boolean isPositionPossible(int centerX, int centerY) {
+  boolean isPositionPossible(int centerX, int centerY, ArrayList<Ship> setShips) {
     final int actualX = centerX + relativeX;
     final int actualY = centerY + relativeY;
-    return actualX >= 0 && actualX < 10 && actualY >= 0 && actualY < 10;
+    final boolean isOnBoard = actualX >= 0 && actualX < 10 && actualY >= 0 && actualY < 10;
+    boolean isPositionValidBecauseItIsNotIntersectingWithOtherBlock = true;
+    for(Ship s: setShips) {
+      for(ShipBlock b: s.blocks) {
+        if(actualX == b.getAbsoluteX(s.getX()) && actualY == b.getAbsoluteY(s.getY())) {
+          isPositionValidBecauseItIsNotIntersectingWithOtherBlock = false;
+        }
+      }
+    }
+    return isPositionValidBecauseItIsNotIntersectingWithOtherBlock && isOnBoard;
   }
   
   public int getAbsoluteX(int centerX) {

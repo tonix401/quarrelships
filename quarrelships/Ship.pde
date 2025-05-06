@@ -1,7 +1,7 @@
 class Ship {
   private int centerX;
   private int centerY;
-  private ArrayList<ShipBlock> blocks = new ArrayList<ShipBlock>();
+  ArrayList<ShipBlock> blocks = new ArrayList<ShipBlock>();
   
   public Ship(ShipTypes type) {
     
@@ -48,18 +48,26 @@ class Ship {
     this.centerY = y;
   }
   
+  public int getX() {
+    return this.centerX;
+  }
+  
+  public int getY() {
+    return this.centerY;
+  }
+  
   public void show(Board board) {
     for (ShipBlock block : blocks) {
       if (board.getCellAt(block.getAbsoluteX(this.centerX), block.getAbsoluteY(this.centerY)) != null) {
-        board.getCellAt(block.getAbsoluteX(this.centerX), block.getAbsoluteY(this.centerY)).show(0, 255, 0);
+        board.getCellAt(block.getAbsoluteX(this.centerX), block.getAbsoluteY(this.centerY)).show((int)(Math.random() * 255), (int)(Math.random() * 255), (int)(Math.random() * 255));
       }
     }
   }
   
-  boolean isPositionPossible(int x, int y) {
+  boolean isPositionPossible(int x, int y, ArrayList<Ship> setShips) {
     boolean isPossible = true;
     for(ShipBlock b: blocks){
-      if(!b.isPositionPossible(x, y)) {
+      if(!b.isPositionPossible(x, y, setShips)) {
         isPossible = false;
       }
     }
