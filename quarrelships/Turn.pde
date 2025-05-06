@@ -3,5 +3,4 @@ enum Turn {
   player2setup,
   player1turn,
   player2turn,
-  boardhidden,
 }
