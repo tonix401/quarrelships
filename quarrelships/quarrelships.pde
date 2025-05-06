@@ -1,6 +1,6 @@
 
 
-Button btn1 = new Button(750, 540, 200, 50, "Button 1");
+Button btn1 = new Button(750, 540, 200, 50, "Next Player");
 Button btn2 = new Button(750, 600, 200, 50, "Button 2");
 GameMaster gm;
 
@@ -11,6 +11,7 @@ void setup() {
 }
 
 void draw() {
+  background(255);
   gm.render();
   btn1.show();
   btn2.show();

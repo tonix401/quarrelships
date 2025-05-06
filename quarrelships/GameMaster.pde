@@ -3,8 +3,8 @@ public class GameMaster {
   private Board board1, board2;
 
   public GameMaster() {
-    this.board1 = new Board();
-    this.board2 = new Board();
+    this.board1 = new Board("Player Red", 255, 0, 0);
+    this.board2 = new Board("Player Blue", 0, 0, 255);
     this.currentTurn = Turn.player1setup;
   }
   

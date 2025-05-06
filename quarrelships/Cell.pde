@@ -10,7 +10,8 @@ class Cell {
     this.y = y;
   }
   
-  void show() {
+  void show(int r, int g, int b) {
+    fill(r, g, b);
     square(x, y, size);
   }
   
