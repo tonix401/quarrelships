@@ -21,14 +21,22 @@ class Board {
     return cells.get(y + x * 10);
   }
   
+  public Cell getCellAtMousePos() {
+    return getCellAt(mouseX / 70, mouseY / 70);
+  }
+  
   public void show(boolean showBoats) {
     for (Cell cell : cells)
       cell.show(255, 255, 255);
-    if (getCellAt(mouseX / 70, mouseY / 70) != null)
-      getCellAt(mouseX / 70, mouseY / 70).show(r, g, b);
+    if (getCellAtMousePos() != null)
+      getCellAtMousePos().show(r, g, b);
     if (showBoats)
       for (Ship ship : ships) {
         ship.show(this);
       }
+  }
+  
+  public Cell tryClick() {
+    return getCellAtMousePos();
   }
 }

@@ -22,6 +22,7 @@ void mouseClicked() {
     gm.nextTurn();
   }
   btn2.tryClick(mouseX, mouseY);
+  gm.checkClick();
 }
 
 void keyPressed() {
