@@ -10,8 +10,8 @@ class Board {
     }
   }
   
-  public void show(int i) {
-    fill(i);
+  public void show() {
+    fill(255);
     for (Cell cell : cells)
       cell.show();
   }
