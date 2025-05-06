@@ -49,6 +49,19 @@ public class GameMaster {
     println(clickedCell.getConvertedX() + ", " + clickedCell.getConvertedY());
   }
   
+  public void rotateActiveShip() {
+    switch(currentTurn) {
+      case PLAYER1SETUP:
+        board1.rotateActiveShip();
+        break;
+      case PLAYER2SETUP:
+        board2.rotateActiveShip();
+        break;
+     default:
+       break;
+    }
+  }
+  
   public void render() {
     String displayTurn = "";
     

@@ -42,10 +42,16 @@ class Board {
       for (Ship ship : setShips) {
         ship.show(this);
       }
-      activeShip.show(this);
+    if (getCellAtMousePos() != null)
+      activeShip.setPosition(getCellAtMousePos().getConvertedX(), getCellAtMousePos().getConvertedY());
+    activeShip.show(this);
   }
   
   public Cell tryClick() {
     return getCellAtMousePos();
+  }
+  
+  public void rotateActiveShip() {
+    activeShip.rotate();
   }
 }
