@@ -12,7 +12,10 @@ public class Button {
   }
   
   public void show() {
-    fill(255);
+    if (mouseX < this.x || mouseX > this.x + _width || mouseY < this.y || mouseY > this.y + _height)
+      fill(255);
+    else
+      fill(200);
     rect(x, y, _width, _height);
     textSize(20);
     textAlign(CENTER, CENTER);
