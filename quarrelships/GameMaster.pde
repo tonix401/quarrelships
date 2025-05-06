@@ -31,19 +31,19 @@ public class GameMaster {
     
     switch(currentTurn) {
       case PLAYER1SETUP:
-        board1.show();
+        board1.show(true);
         displayTurn = "Player 1 Setup";
         break;
       case PLAYER2SETUP:
-        board2.show();
+        board2.show(true);
         displayTurn = "Player 2 Setup";
         break;
       case PLAYER1TURN:
-        board2.show();
+        board2.show(false);
         displayTurn = "Player 1 Turn";
         break;
       case PLAYER2TURN:
-        board1.show();
+        board1.show(false);
         displayTurn = "Player 2 Turn";
         break;
     }
