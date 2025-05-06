@@ -17,6 +17,8 @@ void draw() {
 }
 
 void mouseClicked() {
-  btn1.tryClick(mouseX, mouseY);
+  if(btn1.tryClick(mouseX, mouseY)){
+    gm.nextTurn();
+  }
   btn2.tryClick(mouseX, mouseY);
 }

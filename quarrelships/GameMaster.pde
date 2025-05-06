@@ -1,11 +1,29 @@
-class GameMaster {
-  Turn currentTurn;
-  Board board1, board2;
+public class GameMaster {
+  private Turn currentTurn;
+  private Board board1, board2;
 
   public GameMaster() {
     this.board1 = new Board();
     this.board2 = new Board();
     this.currentTurn = Turn.player1setup;
+  }
+  
+  public void nextTurn() {
+    switch(currentTurn) {
+      case player1setup:
+        this.currentTurn = Turn.player2setup;
+        break;
+      case player2setup:
+        this.currentTurn = Turn.player1turn;
+        break;
+      case player1turn:
+        this.currentTurn = Turn.player2turn;
+        break;
+      case player2turn:
+        this.currentTurn = Turn.player1turn;
+        break;
+    }
+    println(currentTurn);
   }
   
   public void render() {
