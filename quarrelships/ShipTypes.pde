@@ -1,0 +1,7 @@
+enum ShipTypes {
+  DESTROYER,
+  SUBMARINE,
+  CRUISER,
+  BATTLESHIP,
+  CARRIER
+}
