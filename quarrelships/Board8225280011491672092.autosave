@@ -1,17 +1,25 @@
 class Board {
   
   private ArrayList<Cell> cells = new ArrayList<Cell>();
-  private ArrayList<Ship> setShips = new ArrayList<Ship>();
   private ArrayList<Ship> unsetShips = new ArrayList<Ship>();
+  private ArrayList<Ship> setShips = new ArrayList<Ship>();
   private Ship activeShip;
   private int r, g, b;
   
   Board(int r, int g, int b) {
-    this.activeShip = new Ship(ShipTypes.DESTROYER);
+    // Ships that have been placed on the board already
+    this.setShips = new ArrayList<Ship>();
+    
+    // Ships that still need to be placed, but are not being actively placed atm
+    this.unsetShips = new ArrayList<Ship>();
     this.unsetShips.add(new Ship(ShipTypes.SUBMARINE));
     this.unsetShips.add(new Ship(ShipTypes.CRUISER));
     this.unsetShips.add(new Ship(ShipTypes.BATTLESHIP));
     this.unsetShips.add(new Ship(ShipTypes.CARRIER));
+    
+    // The ship that is being actively placed right now
+    this.activeShip = new Ship(ShipTypes.DESTROYER);
+    
     
     this.r = r;
     this.g = g;
@@ -29,23 +37,15 @@ class Board {
     return cells.get(y + x * 10);
   }
   
-  public Cell getCellAtMousePos() {
-    return getCellAt(mouseX / 70, mouseY / 70);
-  }
-  
   public void show(boolean showBoats) {
     for (Cell cell : cells)
       cell.show(255, 255, 255);
-    if (getCellAtMousePos() != null)
-      getCellAtMousePos().show(r, g, b);
+    if (getCellAt(mouseX / 70, mouseY / 70) != null)
+      getCellAt(mouseX / 70, mouseY / 70).show(r, g, b);
     if (showBoats)
       for (Ship ship : setShips) {
         ship.show(this);
       }
       activeShip.show(this);
-  }
-  
-  public Cell tryClick() {
-    return getCellAtMousePos();
   }
 }

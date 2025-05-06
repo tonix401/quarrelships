@@ -4,8 +4,13 @@ class Ship {
   private ArrayList<ShipBlock> blocks = new ArrayList<ShipBlock>();
   
   public Ship(ShipTypes type) {
-    centerX = 0;
-    centerY = 0;
+    
+    if(centerX >= 10 || centerX < 0 || centerY >= 10 || centerY < 0){
+      throw new ArrayIndexOutOfBoundsException();
+    }
+    
+    this.centerX = 0;
+    this.centerY = 0;
     
     switch (type) {
       case DESTROYER:
@@ -36,6 +41,11 @@ class Ship {
         blocks.add(new ShipBlock(2, 0));
         break;
     }
+  }
+  
+  void setPosition(int x, int y) {
+    this.centerX = x;
+    this.centerY = y;
   }
   
   public void show(Board board) {
