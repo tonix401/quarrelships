@@ -7,7 +7,7 @@ class Board {
   private int r, g, b;
   
   Board(int r, int g, int b) {
-    this.activeShip = new Ship(ShipTypes.DESTROYER);
+    this.activeShip = new Ship(ShipTypes.BATTLESHIP);
     this.unsetShips.add(new Ship(ShipTypes.SUBMARINE));
     this.unsetShips.add(new Ship(ShipTypes.CRUISER));
     this.unsetShips.add(new Ship(ShipTypes.BATTLESHIP));
