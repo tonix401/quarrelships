@@ -20,9 +20,9 @@ public class Button {
     text(displayText, (x + _width / 2), y + _height / 2);
   }
   
-  public void tryClick(int x, int y) {
+  public boolean tryClick(int x, int y) {
     if (x < this.x || x > this.x + _width || y < this.y || y > this.y + _height)
-      return;
-    println(this.displayText);
+      return false;
+    return true;
   }
 }
