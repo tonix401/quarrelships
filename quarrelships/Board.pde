@@ -1,8 +1,14 @@
 class Board {
   
-  ArrayList<Cell> cells = new ArrayList<Cell>();
+  private ArrayList<Cell> cells = new ArrayList<Cell>();
+  private int r, g, b;
+  private String name;
   
-  Board() {
+  Board(String name, int r, int g, int b) {
+    this.r = r;
+    this.g = g;
+    this.b = b;
+    this.name = name;
     for (int i = 0; i < height; i += height / 10) {
       for (int j = 0; j < height; j += height / 10) {
         cells.add(new Cell(height / 10, i, j));
@@ -10,9 +16,20 @@ class Board {
     }
   }
   
+  public Cell getCellAt(int x, int y) {
+    if (x < 0 || x >= 10 || y < 0 || y >= 10)
+      return null;
+    return cells.get(y + x * 10);
+  }
+  
   public void show() {
-    fill(255);
+    textSize(30);
+    textAlign(CENTER, CENTER);
+    fill(r, g, b);
+    text(name, 850, 100);
     for (Cell cell : cells)
-      cell.show();
+      cell.show(255, 255, 255);
+    if (getCellAt(mouseX / 70, mouseY / 70) != null)
+      getCellAt(mouseX / 70, mouseY / 70).show(r, g, b);
   }
 }
