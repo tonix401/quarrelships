@@ -15,5 +15,11 @@ class ShipBlock {
     return actualX >= 0 && actualX < 10 && actualY >= 0 && actualY < 10;
   }
   
+  public int getAbsoluteX(int centerX) {
+    return centerX + this.relativeX;
+  }
   
+  public int getAbsoluteY(int centerY) {
+    return centerY + this.relativeY;
+  }
 }

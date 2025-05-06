@@ -1,7 +1,7 @@
 class Ship {
   private int centerX;
   private int centerY;
-  ArrayList<ShipBlock> blocks = new ArrayList<ShipBlock>();
+  private ArrayList<ShipBlock> blocks = new ArrayList<ShipBlock>();
   
   public Ship(ShipTypes type) {
     centerX = 0;
@@ -35,6 +35,14 @@ class Ship {
         blocks.add(new ShipBlock(1, 0));
         blocks.add(new ShipBlock(2, 0));
         break;
+    }
+  }
+  
+  public void show(Board board) {
+    for (ShipBlock block : blocks) {
+      if (board.getCellAt(block.getAbsoluteX(this.centerX), block.getAbsoluteY(this.centerY)) != null) {
+        board.getCellAt(block.getAbsoluteX(this.centerX), block.getAbsoluteY(this.centerY)).show(0, 255, 0);
+      }
     }
   }
   

@@ -1,6 +1,7 @@
 class Board {
   
   private ArrayList<Cell> cells = new ArrayList<Cell>();
+  private ArrayList<Ship> ships = new ArrayList<Ship>();
   private int r, g, b;
   
   Board(int r, int g, int b) {
@@ -20,10 +21,14 @@ class Board {
     return cells.get(y + x * 10);
   }
   
-  public void show() {
+  public void show(boolean showBoats) {
     for (Cell cell : cells)
       cell.show(255, 255, 255);
     if (getCellAt(mouseX / 70, mouseY / 70) != null)
       getCellAt(mouseX / 70, mouseY / 70).show(r, g, b);
+    if (showBoats)
+      for (Ship ship : ships) {
+        ship.show(this);
+      }
   }
 }
