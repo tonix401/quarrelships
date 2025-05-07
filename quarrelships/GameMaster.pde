@@ -42,13 +42,17 @@ public class GameMaster {
     switch(currentTurn) {
       case PLAYER1SETUP:
         clickedCell = board1.getCellAtMousePos();
-        if(board1.activeShip.isPositionPossible(board1.setShips) && clickedCell != null) {
+        if (clickedCell == null)
+          break;
+        if(board1.activeShip.isPositionPossible(board1.setShips)) {
           board1.setActiveShip();
         }
         break;
       case PLAYER2SETUP:
         clickedCell = board2.getCellAtMousePos();
-        if(board2.activeShip.isPositionPossible(board2.setShips) && clickedCell != null) {
+        if (clickedCell == null)
+          break;
+        if(board2.activeShip.isPositionPossible(board2.setShips)) {
           board2.setActiveShip();
         }
         break;
