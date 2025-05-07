@@ -72,6 +72,11 @@ class Board {
     }
   }
   
+  public void dropBombAt(int x, int y) {
+    println("DEBUG | dropping bomb at " + x + ", " + y);
+    
+  }
+  
   public ArrayList<Ship> getSetShips() {
     return setShips;
   }
