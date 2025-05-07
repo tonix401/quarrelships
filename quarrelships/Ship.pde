@@ -102,5 +102,6 @@ class Ship {
       b.relativeY = tempRelX;
     }
     rotation += 1.0;
+    rotation %= 4;
   }
 }
