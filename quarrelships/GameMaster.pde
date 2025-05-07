@@ -1,26 +1,32 @@
 public class GameMaster {
   private Turn currentTurn;
-  private Board board1, board2;
+  private final Board board1, board2;
+  private Board activeBoard;
 
   public GameMaster() {
     this.board1 = new Board(0, 255, 0);
     this.board2 = new Board(0, 0, 255);
     this.currentTurn = Turn.PLAYER1SETUP;
+    this.activeBoard = this.board1;
   }
   
   public void nextTurn() {
     switch(currentTurn) {
       case PLAYER1SETUP:
         this.currentTurn = Turn.PLAYER2SETUP;
+        this.activeBoard = this.board2;
         break;
       case PLAYER2SETUP:
         this.currentTurn = Turn.PLAYER1TURN;
+        this.activeBoard = this.board1;
         break;
       case PLAYER1TURN:
         this.currentTurn = Turn.PLAYER2TURN;
+        this.activeBoard = this.board1;
         break;
       case PLAYER2TURN:
         this.currentTurn = Turn.PLAYER1TURN;
+        this.activeBoard = this.board2;
         break;
     }
     println(currentTurn);
@@ -32,6 +38,9 @@ public class GameMaster {
     switch(currentTurn) {
       case PLAYER1SETUP:
         clickedCell = board1.getCellAtMousePos();
+        if(board1.activeShip.isPositionPossible(board1.setShips)) {
+        }
+        board1.setActiveShip();
         break;
       case PLAYER2SETUP:
         clickedCell = board2.getCellAtMousePos();
@@ -61,6 +70,9 @@ public class GameMaster {
        break;
     }
   }
+  public void setActiveShip() {
+    this.activeBoard.setActiveShip();
+  }
   
   public void render() {
     String displayTurn = "";
@@ -83,6 +95,9 @@ public class GameMaster {
         displayTurn = "Player 2 Turn";
         break;
     }
+    
+    fill(255);
+    rect(700, -2, 302, height + 4);
     
     textSize(30);
     textAlign(CENTER, CENTER);
