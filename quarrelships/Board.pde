@@ -75,4 +75,8 @@ class Board {
   public ArrayList<Ship> getSetShips() {
     return setShips;
   }
+  
+  public boolean allShipsSet() {
+    return unsetShips.size() == 0 && activeShip == null;
+  }
 }

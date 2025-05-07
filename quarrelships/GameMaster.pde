@@ -13,10 +13,14 @@ public class GameMaster {
   public void nextTurn() {
     switch(currentTurn) {
       case PLAYER1SETUP:
+        if (!board1.allShipsSet())
+          break;
         this.currentTurn = Turn.PLAYER2SETUP;
         this.activeBoard = this.board2;
         break;
       case PLAYER2SETUP:
+        if (!board2.allShipsSet())
+          break;
         this.currentTurn = Turn.PLAYER1TURN;
         this.activeBoard = this.board1;
         break;
