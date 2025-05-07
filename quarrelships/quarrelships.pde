@@ -1,7 +1,7 @@
 
 
 Button btn1 = new Button(750, 540, 200, 50, "Next Player");
-Button btn2 = new Button(750, 600, 200, 50, "Button 2");
+Button btn2 = new Button(750, 600, 200, 50, "Restart");
 GameMaster gm;
 
 void setup() {
@@ -21,7 +21,9 @@ void mouseClicked() {
   if(btn1.tryClick(mouseX, mouseY)){
     gm.nextTurn();
   }
-  btn2.tryClick(mouseX, mouseY);
+  if (btn2.tryClick(mouseX, mouseY)) {
+    gm = new GameMaster();
+  }
   gm.checkClick();
 }
 
