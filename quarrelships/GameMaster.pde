@@ -33,7 +33,7 @@ public class GameMaster {
         this.activeBoard = this.board2;
         break;
     }
-    println(currentTurn);
+    println("DEBUG | " + currentTurn);
   }
   
   public void checkClick() {
@@ -42,7 +42,7 @@ public class GameMaster {
     switch(currentTurn) {
       case PLAYER1SETUP:
         clickedCell = board1.getCellAtMousePos();
-        if (clickedCell == null)
+        if (clickedCell == null || board1.activeShip == null)
           break;
         if(board1.activeShip.isPositionPossible(board1.setShips)) {
           board1.setActiveShip();
@@ -50,7 +50,7 @@ public class GameMaster {
         break;
       case PLAYER2SETUP:
         clickedCell = board2.getCellAtMousePos();
-        if (clickedCell == null)
+        if (clickedCell == null || board2.activeShip == null)
           break;
         if(board2.activeShip.isPositionPossible(board2.setShips)) {
           board2.setActiveShip();
@@ -58,15 +58,21 @@ public class GameMaster {
         break;
       case PLAYER1TURN:
         clickedCell = board2.getCellAtMousePos();
+        if (clickedCell == null)
+          break;
+        board2.dropBombAt(clickedCell.getConvertedX(), clickedCell.getConvertedY());
         break;
       case PLAYER2TURN:
         clickedCell = board1.getCellAtMousePos();
+        if (clickedCell == null)
+          break;
+          board1.dropBombAt(clickedCell.getConvertedX(), clickedCell.getConvertedY());
         break;
     }
     
     if (clickedCell == null)
       return;
-    println(clickedCell.getConvertedX() + ", " + clickedCell.getConvertedY());
+    println("DEBUG | " + clickedCell.getConvertedX() + ", " + clickedCell.getConvertedY());
   }
   
   public void rotateActiveShip() {
