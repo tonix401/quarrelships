@@ -4,7 +4,6 @@ class Ship {
   private ArrayList<ShipBlock> blocks = new ArrayList<ShipBlock>();
   private PImage shipSprite;
   private float rotation = 1.0;
-  private int shipLength;
   
   public Ship(ShipTypes type) {
     
@@ -20,21 +19,18 @@ class Ship {
         blocks.add(new ShipBlock(0, 0));
         blocks.add(new ShipBlock(1, 0));
         shipSprite = loadImage("destroyer.png");
-        shipLength = 140;
         break;
       case SUBMARINE:
         blocks.add(new ShipBlock(-1, 0));
         blocks.add(new ShipBlock(0, 0));
         blocks.add(new ShipBlock(1, 0));
         shipSprite = loadImage("submarine.png");
-        shipLength = 210;
         break;
       case CRUISER:
         blocks.add(new ShipBlock(-1, 0));
         blocks.add(new ShipBlock(0, 0));
         blocks.add(new ShipBlock(1, 0));
         shipSprite = loadImage("cruiser.png");
-        shipLength = 210;
         break;
       case BATTLESHIP:
         blocks.add(new ShipBlock(-2, 0));
@@ -42,7 +38,6 @@ class Ship {
         blocks.add(new ShipBlock(0, 0));
         blocks.add(new ShipBlock(1, 0));
         shipSprite = loadImage("battleship.png");
-        shipLength = 280;
         break;
       case CARRIER:
         blocks.add(new ShipBlock(-2, 0));
@@ -51,7 +46,6 @@ class Ship {
         blocks.add(new ShipBlock(1, 0));
         blocks.add(new ShipBlock(2, 0));
         shipSprite = loadImage("carrier.png");
-        shipLength = 350;
         break;
     }
   }
@@ -69,14 +63,17 @@ class Ship {
     return this.centerY;
   }
   
-  public void show(Board board) {
+  public void show(Board board, boolean isActive) {
     for (ShipBlock block : blocks) {
-      if (board.getCellAt(block.getAbsoluteX(this.centerX), block.getAbsoluteY(this.centerY)) != null) {
-        if (isPositionPossible(centerX, centerY, board.getSetShips()))
-          board.getCellAt(block.getAbsoluteX(this.centerX), block.getAbsoluteY(this.centerY)).show(board.r, board.g, board.b);
-        else
-          board.getCellAt(block.getAbsoluteX(this.centerX), block.getAbsoluteY(this.centerY)).show(255, 0, 0);
+      if (board.getCellAt(block.getAbsoluteX(this.centerX), block.getAbsoluteY(this.centerY)) == null) continue;
+      if(!isActive){
+        continue;
       }
+      
+      if (isPositionPossible(board.getSetShips()))
+        board.getCellAt(block.getAbsoluteX(this.centerX), block.getAbsoluteY(this.centerY)).show(board.r, board.g, board.b);
+      else
+        board.getCellAt(block.getAbsoluteX(this.centerX), block.getAbsoluteY(this.centerY)).show(255, 0, 0);
     }
     pushMatrix();
     translate(centerX * 70 + 35, centerY * 70 + 35);
@@ -85,10 +82,10 @@ class Ship {
     popMatrix();
   }
   
-  boolean isPositionPossible(int x, int y, ArrayList<Ship> setShips) {
+  boolean isPositionPossible(ArrayList<Ship> setShips) {
     boolean isPossible = true;
     for(ShipBlock b: blocks){
-      if(!b.isPositionPossible(x, y, setShips)) {
+      if(!b.isPositionPossible(this.centerX, this.centerY, setShips)) {
         isPossible = false;
       }
     }
