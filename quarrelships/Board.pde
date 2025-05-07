@@ -7,7 +7,7 @@ class Board {
   private int r, g, b;
   
   Board(int r, int g, int b) {
-    this.activeShip = new Ship(ShipTypes.BATTLESHIP);
+    this.activeShip = new Ship(ShipTypes.CARRIER);
     this.unsetShips.add(new Ship(ShipTypes.SUBMARINE));
     this.unsetShips.add(new Ship(ShipTypes.CRUISER));
     this.unsetShips.add(new Ship(ShipTypes.BATTLESHIP));
@@ -52,6 +52,10 @@ class Board {
   }
   
   public void rotateActiveShip() {
-    activeShip.rotate();
+    activeShip.rotateShip();
+  }
+  
+  public ArrayList<Ship> getSetShips() {
+    return setShips;
   }
 }
