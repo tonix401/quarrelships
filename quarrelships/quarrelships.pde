@@ -30,7 +30,5 @@ void keyPressed() {
     case 'r':
       gm.rotateActiveShip();
       break;
-    case 't':
-      gm.setActiveShip();
   }
 }
