@@ -40,10 +40,16 @@ class TurnMaster implements IGameMaster {
   }
   
   void handleMouseClick(int x, int y) {
+    // Buttons
     for(Button b: this.buttons) {
       if(b.tryClick(x, y))
         b.doFunction();
     }
+    
+    // Cells on the board
+    Cell targetCell = activeBoard.getCellAtMousePos();
+    if(targetCell == null) return;
+    handleHitCell(targetCell);
   }
   
   void handleKeyPress(char key) {
@@ -51,13 +57,47 @@ class TurnMaster implements IGameMaster {
   }
   
   void show() {
+    
+    this.activeBoard.show(false);
+    
+    String displayTurn = "";
+    
+    switch(currentTurn) {
+      case PLAYER1SETUP:
+        board1.show(true);
+        displayTurn = "Player 1 Setup";
+        break;
+      case PLAYER2SETUP:
+        board2.show(true);
+        displayTurn = "Player 2 Setup";
+        break;
+      case PLAYER1TURN:
+        board2.show(false);
+        displayTurn = "Player 1 Turn";
+        break;
+      case PLAYER2TURN:
+        board1.show(false);
+        displayTurn = "Player 2 Turn";
+        break;
+    }
+    
+    fill(255);
+    rect(700, -2, 302, height + 4);
+    textSize(30);
+    textAlign(CENTER, CENTER);
+    fill(0);
+    text(displayTurn, 850, 100);
+    
     for(Button b: this.buttons) {
       b.show();
     }
-    this.activeBoard.show(false);
   }
   
   void nextTurn() {
     
+  }
+  
+  void handleHitCell(Cell targetCell) {
+    targetCell.hit();
   }
 }
