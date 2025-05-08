@@ -8,6 +8,11 @@ class Cell {
     this.y = y;
   }
   
+  void show(int r, int g, int b, int alpha) {
+    fill(r, g, b, alpha);
+    square(x, y, size);
+  }
+  
   void show(int r, int g, int b) {
     fill(r, g, b);
     square(x, y, size);
@@ -41,10 +46,10 @@ class WaterCell extends Cell {
   @Override
   void show() {
     if(isHit) {
-      fill(100);
+      fill(180, 230, 255);
       square(x, y, size);
     } else {
-      fill(200);
+      noFill();
       square(x, y, size);
     }
   }
@@ -67,10 +72,10 @@ class ShipCell extends Cell {
   @Override
   void show() {
     if(isHit) {
-      fill(255);
+      fill(255, 0, 0);
       square(x, y, size);
     } else {
-      fill(0);
+      noFill();
       square(x, y, size);
     }
   }
