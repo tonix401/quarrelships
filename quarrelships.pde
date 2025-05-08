@@ -1,4 +1,4 @@
-IGameMaster gm;
+IGameMaster gm; 
 
 void setup() {
   size(1000, 700);
