@@ -8,7 +8,7 @@ void setup() {
 }
 
 void draw() {
-  background(255);
+  background(160, 210, 255);
   gm.show();
 }
 

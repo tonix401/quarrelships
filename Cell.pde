@@ -12,6 +12,11 @@ class Cell {
     square(x, y, size);
   }
   
+  void show() {
+    noFill();
+    square(x, y, size);
+  }
+  
   public int getConvertedX() {
     return x / 70;
   }
