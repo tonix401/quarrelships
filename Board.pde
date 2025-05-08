@@ -35,7 +35,7 @@ class Board {
   
   public void show(boolean showBoats) {
     for (Cell cell : cells)
-      cell.show(160, 210, 255);
+      cell.show();
     if (getCellAtMousePos() != null)
       getCellAtMousePos().show(r, g, b);
     if (showBoats)

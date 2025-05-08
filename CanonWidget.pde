@@ -1,0 +1,7 @@
+class CanonWidget {
+  
+  public CanonWidget() {
+    
+  }
+  
+}
