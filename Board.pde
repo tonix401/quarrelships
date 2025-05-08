@@ -79,4 +79,18 @@ class Board {
   public boolean isAllShipsSet() {
     return unsetShips.size() == 0 && activeShip == null;
   }
+  
+  public void convertToTurnBoard () {
+    for(Cell c: cells) {
+      for(Ship s: setShips) {
+        for(ShipBlock sb: s.blocks) {
+          if(c.x == sb.getAbsoluteX(s.centerX) && c.y == sb.getAbsoluteY(s.centerY)) {
+            c = new ShipCell(c.size, c.x, c.y);
+          } else {
+            c = new WaterCell(c.size, c.x, c.y);
+          }
+        }
+      }
+    }
+  }
 }
