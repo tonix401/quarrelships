@@ -17,8 +17,9 @@ class CanonBall {
   }
   
   public void nextFrame() {
-    if (curX <= destX + 2 && curY <= destY + 2)
+    if (curX <= destX + 2 && curY <= destY + 2) {
       return;
+    }
     fill(30);
     circle(curX, curY, size);
     for (int i = 0; i < 7; i++) {

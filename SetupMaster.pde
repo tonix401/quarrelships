@@ -25,10 +25,9 @@ public class SetupMaster implements IGameMaster {
         if (!board2.isAllShipsSet())
           break;
         setGameMasterToTurnMaster(this.board1, this.board2);
-        break;
       default:
+        return;
     }
-    println("DEBUG | " + currentTurn);
   };
     
     this.currentTurn = Turn.PLAYER1SETUP;
@@ -138,5 +137,9 @@ public class SetupMaster implements IGameMaster {
     for(Button b: this.buttons) {
       b.show();
     }
+  }
+  
+  String getName() {
+    return "setup master";
   }
 }

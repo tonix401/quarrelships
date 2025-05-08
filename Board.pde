@@ -1,6 +1,7 @@
 class Board {
   
   private ArrayList<Cell> cells = new ArrayList<Cell>();
+  private ArrayList<Cell> formattedCells = new ArrayList<Cell>();
   private ArrayList<Ship> setShips = new ArrayList<Ship>();
   private ArrayList<Ship> unsetShips = new ArrayList<Ship>();
   private Ship activeShip;
@@ -34,7 +35,7 @@ class Board {
   }
   
   public void show(boolean showBoats) {
-    for (Cell cell : cells)
+    for (Cell cell : this.cells)
       cell.show();
     if (getCellAtMousePos() != null)
       getCellAtMousePos().show(r, g, b);
@@ -80,17 +81,22 @@ class Board {
     return unsetShips.size() == 0 && activeShip == null;
   }
   
-  public void convertToTurnBoard () {
-    for(Cell c: cells) {
-      for(Ship s: setShips) {
-        for(ShipBlock sb: s.blocks) {
-          if(c.x == sb.getAbsoluteX(s.centerX) && c.y == sb.getAbsoluteY(s.centerY)) {
-            c = new ShipCell(c.size, c.x, c.y);
-          } else {
-            c = new WaterCell(c.size, c.x, c.y);
+  public void convertToTurnBoard() {
+    for(Cell cell : this.cells) {
+      boolean hit = false;
+      for(Ship ship : this.setShips) {
+        for(ShipBlock block : ship.blocks) {
+          if(cell.getConvertedX() == block.getAbsoluteX(ship.getX()) && cell.getConvertedY() == block.getAbsoluteY(ship.getY())) {
+            this.formattedCells.add(new ShipCell(cell.size, cell.x, cell.y));
+            hit = true;
           }
         }
       }
+      if (!hit) {
+        formattedCells.add(new WaterCell(cell.size, cell.x, cell.y));
+      }
     }
+    
+    this.cells = this.formattedCells;
   }
 }

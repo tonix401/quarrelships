@@ -30,7 +30,9 @@ class Cell {
 }
 
 class WaterCell extends Cell {
+  
   private boolean isHit;
+  
   public WaterCell(int size, int x, int y) {
     super(size, x, y);
     this.isHit = false;
@@ -50,12 +52,13 @@ class WaterCell extends Cell {
   @Override
   void hit() {
     this.isHit = true;
-    println("hit a water cell");
   }
 }
 
 class ShipCell extends Cell {
+  
   private boolean isHit;
+  
   public ShipCell(int size, int x, int y) {
     super(size, x, y);
     this.isHit = false;
@@ -75,6 +78,5 @@ class ShipCell extends Cell {
   @Override
   void hit() {
     this.isHit = true;
-    println("hit a ship cell");
   }
 }

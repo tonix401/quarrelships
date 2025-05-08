@@ -18,23 +18,20 @@ class TurnMaster implements IGameMaster {
     
     ILambdaFunction nextTurn = () -> {
       switch(currentTurn) {
-        case PLAYER1SETUP:
-          if (!board1.isAllShipsSet())
-            break;
-          this.currentTurn = Turn.PLAYER2SETUP;
+        case PLAYER1TURN:
+          this.currentTurn = Turn.PLAYER2TURN;
           this.activeBoard = this.board2;
           break;
-        case PLAYER2SETUP:
-          if (!board2.isAllShipsSet())
-            break;
-          setGameMasterToTurnMaster(this.board1, this.board2);
+        case PLAYER2TURN:
+          this.currentTurn = Turn.PLAYER1TURN;
+          this.activeBoard = board1;
           break;
         default:
       }
     };
     
     this.activeBoard = this.board2;
-    this.nextTurnButton = new Button(750, 540, 200, 50, "Next Player", nextTurn ,false);
+    this.nextTurnButton = new Button(750, 540, 200, 50, "Next Player", nextTurn, false);
     this.resetButton = new Button(750, 600, 200, 50, "Restart Game", resetGame);
     this.buttons = new ArrayList<Button>();
     this.buttons.add(nextTurnButton);
@@ -59,28 +56,19 @@ class TurnMaster implements IGameMaster {
   }
   
   void show() {
-    
     this.activeBoard.show(false);
     
     String displayTurn = "";
     
     switch(currentTurn) {
-      case PLAYER1SETUP:
-        board1.show(true);
-        displayTurn = "Player 1 Setup";
-        break;
-      case PLAYER2SETUP:
-        board2.show(true);
-        displayTurn = "Player 2 Setup";
-        break;
       case PLAYER1TURN:
-        board2.show(false);
         displayTurn = "Player 1 Turn";
         break;
       case PLAYER2TURN:
-        board1.show(false);
         displayTurn = "Player 2 Turn";
         break;
+      default:
+        println("ERROR | wrong turn" + currentTurn);
     }
     
     fill(255);
@@ -101,5 +89,9 @@ class TurnMaster implements IGameMaster {
   
   void handleHitCell(Cell targetCell) {
     targetCell.hit();
+  }
+  
+  String getName() {
+    return "turn master";
   }
 }
