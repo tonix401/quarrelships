@@ -36,16 +36,18 @@ class WaterCell extends Cell {
     this.isHit = false;
   }
   
+  @Override
   void show() {
     if(isHit) {
-      fill(190, 230, 255);
+      fill(100);
       square(x, y, size);
     } else {
-      noFill();
+      fill(200);
       square(x, y, size);
     }
   }
   
+  @Override
   void hit() {
     this.isHit = true;
     println("hit a water cell");
@@ -59,16 +61,18 @@ class ShipCell extends Cell {
     this.isHit = false;
   }
   
+  @Override
   void show() {
     if(isHit) {
-      fill(190, 230, 255);
+      fill(255);
       square(x, y, size);
     } else {
-      noFill();
+      fill(0);
       square(x, y, size);
     }
   }
   
+  @Override
   void hit() {
     this.isHit = true;
     println("hit a ship cell");

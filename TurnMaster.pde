@@ -13,6 +13,8 @@ class TurnMaster implements IGameMaster {
     this.currentTurn = Turn.PLAYER1TURN;
     this.board1 = board1;
     this.board2 = board2;
+    this.board1.convertToTurnBoard();
+    this.board2.convertToTurnBoard();
     
     ILambdaFunction nextTurn = () -> {
       switch(currentTurn) {
