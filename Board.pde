@@ -66,22 +66,17 @@ class Board {
     }
     this.setShips.add(this.activeShip);
     if(unsetShips.size() != 0) {
-      this.activeShip = this.unsetShips.remove(unsetShips.size() - 1);
+      this.activeShip = this.unsetShips.remove(0);
     } else {
       this.activeShip = null;
     }
-  }
-  
-  public void dropBombAt(int x, int y) {
-    println("DEBUG | dropping bomb at " + x + ", " + y);
-    
   }
   
   public ArrayList<Ship> getSetShips() {
     return setShips;
   }
   
-  public boolean allShipsSet() {
+  public boolean isAllShipsSet() {
     return unsetShips.size() == 0 && activeShip == null;
   }
 }

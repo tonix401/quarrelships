@@ -18,26 +18,26 @@ class Ship {
       case DESTROYER:
         blocks.add(new ShipBlock(0, 0));
         blocks.add(new ShipBlock(1, 0));
-        shipSprite = loadImage("destroyer.png");
+        shipSprite = loadImage("images/destroyer.png");
         break;
       case SUBMARINE:
         blocks.add(new ShipBlock(-1, 0));
         blocks.add(new ShipBlock(0, 0));
         blocks.add(new ShipBlock(1, 0));
-        shipSprite = loadImage("submarine.png");
+        shipSprite = loadImage("images/submarine.png");
         break;
       case CRUISER:
         blocks.add(new ShipBlock(-1, 0));
         blocks.add(new ShipBlock(0, 0));
         blocks.add(new ShipBlock(1, 0));
-        shipSprite = loadImage("cruiser.png");
+        shipSprite = loadImage("images/cruiser.png");
         break;
       case BATTLESHIP:
         blocks.add(new ShipBlock(-2, 0));
         blocks.add(new ShipBlock(-1, 0));
         blocks.add(new ShipBlock(0, 0));
         blocks.add(new ShipBlock(1, 0));
-        shipSprite = loadImage("battleship.png");
+        shipSprite = loadImage("images/battleship.png");
         break;
       case CARRIER:
         blocks.add(new ShipBlock(-2, 0));
@@ -45,7 +45,7 @@ class Ship {
         blocks.add(new ShipBlock(0, 0));
         blocks.add(new ShipBlock(1, 0));
         blocks.add(new ShipBlock(2, 0));
-        shipSprite = loadImage("carrier.png");
+        shipSprite = loadImage("images/carrier.png");
         break;
     }
   }
