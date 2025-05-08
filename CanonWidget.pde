@@ -22,6 +22,8 @@ class CanonWidget {
     fill(50);
     strokeWeight(0);
     circle(850, 350, 50);
+    
+    strokeWeight(1);
   }
   
 }
