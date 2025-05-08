@@ -1,5 +1,4 @@
 IGameMaster gm;
-CanonBall ball = new CanonBall(100, 100);
 
 void setup() {
   size(1000, 700);
@@ -11,7 +10,6 @@ void setup() {
 void draw() {
   background(160, 210, 255);
   gm.show();
-  ball.nextFrame();
 }
 
 void mouseClicked() {

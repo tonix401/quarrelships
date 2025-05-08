@@ -16,7 +16,7 @@ class CanonWidget {
     pushMatrix();
     translate(850, 350);
     rotate(alpha);
-    rect(0, -10, -100, 20);
+    rect(0, -15, -70, 30);
     popMatrix();
     
     fill(50);
