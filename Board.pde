@@ -6,6 +6,7 @@ class Board {
   private ArrayList<Ship> unsetShips = new ArrayList<Ship>();
   private Ship activeShip;
   private int r, g, b;
+  private int amtShipCells = 0;
   
   Board(int r, int g, int b) {
     this.activeShip = new Ship(ShipTypes.DESTROYER);
@@ -34,11 +35,27 @@ class Board {
     return getCellAt(mouseX / 70, mouseY / 70);
   }
   
+  public void show(boolean showBoats, int r, int g, int b) {
+    for (Cell cell : this.cells)
+      cell.show();
+    if (getCellAtMousePos() != null)
+      getCellAtMousePos().show(r, g, b, 100);
+    if (showBoats)
+      for (Ship ship : setShips) {
+        ship.show(this, false);
+      }
+    if (this.activeShip == null)
+      return;
+    if (getCellAtMousePos() != null)
+      activeShip.setPosition(getCellAtMousePos().getConvertedX(), getCellAtMousePos().getConvertedY());
+    activeShip.show(this, true);
+  }
+  
   public void show(boolean showBoats) {
     for (Cell cell : this.cells)
       cell.show();
     if (getCellAtMousePos() != null)
-      getCellAtMousePos().show(r, g, b);
+      getCellAtMousePos().show(r, g, b, 100);
     if (showBoats)
       for (Ship ship : setShips) {
         ship.show(this, false);
@@ -89,6 +106,7 @@ class Board {
           if(cell.getConvertedX() == block.getAbsoluteX(ship.getX()) && cell.getConvertedY() == block.getAbsoluteY(ship.getY())) {
             this.formattedCells.add(new ShipCell(cell.size, cell.x, cell.y));
             hit = true;
+            amtShipCells++;
           }
         }
       }
@@ -98,5 +116,17 @@ class Board {
     }
     
     this.cells = this.formattedCells;
+  }
+  
+  public void setHitPoints(int hp) {
+    this.amtShipCells = hp;
+  }
+  
+  public int getHitPoints() {
+    return this.amtShipCells;
+  }
+  
+  public void decreaseHitPoints() {
+    this.amtShipCells--;
   }
 }

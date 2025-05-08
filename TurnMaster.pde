@@ -56,20 +56,22 @@ class TurnMaster implements IGameMaster {
   }
   
   void show() {
-    this.activeBoard.show(false);
-    
     String displayTurn = "";
-    
+    int r = 0, g = 0, b = 0;
     switch(currentTurn) {
       case PLAYER1TURN:
+        g = 255;
         displayTurn = "Player 1 Turn";
         break;
       case PLAYER2TURN:
+        b = 255;
         displayTurn = "Player 2 Turn";
         break;
       default:
         println("ERROR | wrong turn" + currentTurn);
     }
+    
+    this.activeBoard.show(false, r, g, b);
     
     fill(255);
     rect(700, -2, 302, height + 4);
@@ -78,8 +80,8 @@ class TurnMaster implements IGameMaster {
     fill(0);
     text(displayTurn, 850, 100);
     
-    for(Button b: this.buttons) {
-      b.show();
+    for(Button button: this.buttons) {
+      button.show();
     }
   }
   
