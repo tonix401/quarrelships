@@ -20,8 +20,8 @@ void keyPressed() {
   gm.handleKeyPress(key);
 }
 
-void setGameMasterToTurnMaster() {
-  gm = new TurnMaster();
+void setGameMasterToTurnMaster(Board board1, Board board2) {
+  gm = new TurnMaster(board1, board2);
 }
 
 void resetGame() {

@@ -24,7 +24,7 @@ public class SetupMaster implements IGameMaster {
       case PLAYER2SETUP:
         if (!board2.isAllShipsSet())
           break;
-        setGameMasterToTurnMaster();
+        setGameMasterToTurnMaster(this.board1, this.board2);
         break;
       default:
     }
