@@ -3,7 +3,7 @@ IGameMaster gm;
 void setup() {
   size(1000, 700);
   background(255);
-  gm = new SetupMaster();
+  gm = new MenuMaster();
   
 }
 
@@ -13,7 +13,7 @@ void draw() {
 }
 
 void mouseClicked() {
-  gm.handleMouseClick(mouseX, mouseY);
+  gm.handleMouseClick();
 }
 
 void keyPressed() {
@@ -24,6 +24,10 @@ void setGameMasterToTurnMaster(Board board1, Board board2) {
   gm = new TurnMaster(board1, board2);
 }
 
-void resetGame() {
+void setGameMasterToSetupMaster() {
   gm = new SetupMaster();
+}
+
+void resetGame() {
+  gm = new MenuMaster();
 }

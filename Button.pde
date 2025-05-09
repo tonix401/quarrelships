@@ -32,7 +32,7 @@ public class Button {
   
   public void show() {
     if(!isEnabled) return;
-    if (mouseX < this.x || mouseX > this.x + _width || mouseY < this.y || mouseY > this.y + _height)
+    if (isMouseOverButton())
       fill(255);
     else
       fill(200);
@@ -43,13 +43,17 @@ public class Button {
     text(displayText, (x + _width / 2), y + _height / 2);
   }
   
-  public boolean tryClick(int x, int y) {
-    if (x < this.x || x > this.x + _width || y < this.y || y > this.y + _height || !isEnabled)
+  public boolean tryClick() {
+    if (!isMouseOverButton() || !isEnabled)
       return false;
     return true;
   }
   
   public void doFunction() {
     func.function();
+  }
+  
+  boolean isMouseOverButton() {
+    return mouseX < this.x || mouseX > this.x + _width || mouseY < this.y || mouseY > this.y + _height;
   }
 }

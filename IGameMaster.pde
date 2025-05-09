@@ -1,6 +1,5 @@
 interface IGameMaster{
   void handleKeyPress(char key);
-  void handleMouseClick(int x, int y);
+  void handleMouseClick();
   void show();
-  String getName();
 }

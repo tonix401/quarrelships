@@ -101,4 +101,10 @@ class Ship {
     rotation += 1.0;
     rotation %= 4;
   }
+  
+  void rotateToRandomRotation() {
+    for(int i = 0; i < Math.floor(Math.random() * 4); i++) {
+      rotateShip();
+    }
+  }
 }
