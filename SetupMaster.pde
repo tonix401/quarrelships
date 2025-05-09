@@ -2,11 +2,25 @@ public class SetupMaster implements IGameMaster {
   private Turn currentTurn;
   private final Board board1, board2;
   private Board activeBoard;
-  private Button resetButton, nextTurnButton;
+  private Button resetButton, nextTurnButton, setRemainingButton;
   private ArrayList<Button> buttons;
   
   ILambdaFunction resetGame = () -> {
     resetGame();
+  };
+  
+  ILambdaFunction setShips = () -> {
+    if (!(activeBoard.unsetShips.size() > 0))
+      return;
+    
+    while(activeBoard.activeShip != null) {
+      final Ship s = activeBoard.activeShip;
+      s.setPosition((int)(Math.random() * 10), (int)(Math.random() * 10));
+      s.rotateToRandomRotation();
+      if(s.isPositionPossible(activeBoard.setShips)) {
+        activeBoard.setActiveShip();
+      }
+    }
   };
 
   public SetupMaster() {
@@ -32,11 +46,13 @@ public class SetupMaster implements IGameMaster {
     
     this.currentTurn = Turn.PLAYER1SETUP;
     this.activeBoard = this.board1;
-    this.nextTurnButton = new Button(750, 540, 200, 50, "Next Player", nextTurn ,false);
-    this.resetButton = new Button(750, 600, 200, 50, "Restart Game", resetGame);
+    this.nextTurnButton = new Button(750, 560, 200, 50, "Next Player", nextTurn ,false);
+    this.setRemainingButton = new Button(750, 560, 200, 50, "Set Remaining", setShips);
+    this.resetButton = new Button(750, 620, 200, 50, "Restart Game", resetGame);
     this.buttons = new ArrayList<Button>();
     this.buttons.add(nextTurnButton);
     this.buttons.add(resetButton);
+    this.buttons.add(setRemainingButton);
   }
   
   void handleKeyPress(char key){
@@ -46,7 +62,7 @@ public class SetupMaster implements IGameMaster {
     }
   } 
   
-  public void handleMouseClick(int x, int y) {
+  public void handleMouseClick() {
     Cell clickedCell = null;
     
     switch(currentTurn) {
@@ -70,7 +86,7 @@ public class SetupMaster implements IGameMaster {
     }
     
     for(Button b: this.buttons) {
-      if (b.tryClick(x, y))
+      if (b.tryClick())
         b.doFunction();
     }
     
@@ -123,17 +139,15 @@ public class SetupMaster implements IGameMaster {
     // Enable button when all ships are set
     if(activeBoard.isAllShipsSet()) {
       nextTurnButton.setIsEnabled(true);
+      setRemainingButton.setIsEnabled(false);
     } else {
       nextTurnButton.setIsEnabled(false);
+      setRemainingButton.setIsEnabled(true);
     }
     
     // Buttons
     for(Button b: this.buttons) {
       b.show();
     }
-  }
-  
-  String getName() {
-    return "setup master";
   }
 }

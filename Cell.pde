@@ -31,7 +31,9 @@ class Cell {
     return y / 70;
   }
   
-  public void hit(){};
+  public boolean hit(){ 
+    return false;
+  }
 }
 
 class WaterCell extends Cell {
@@ -55,8 +57,9 @@ class WaterCell extends Cell {
   }
   
   @Override
-  void hit() {
+  boolean hit() {
     this.isHit = true;
+    return false;
   }
 }
 
@@ -81,7 +84,8 @@ class ShipCell extends Cell {
   }
   
   @Override
-  void hit() {
+  boolean hit() {
     this.isHit = true;
+    return true;
   }
 }

@@ -1,6 +1,7 @@
 class TurnMaster implements IGameMaster {
   private Turn currentTurn;
   private final Board board1, board2;
+  private int score1, score2;
   private Board activeBoard;
   private Button resetButton, nextTurnButton;
   private ArrayList<Button> buttons;
@@ -10,6 +11,8 @@ class TurnMaster implements IGameMaster {
   };
   
   public TurnMaster(Board board1, Board board2) {
+    this.score1 = 0;
+    this.score2 = 0;
     this.currentTurn = Turn.PLAYER1TURN;
     this.board1 = board1;
     this.board2 = board2;
@@ -38,10 +41,10 @@ class TurnMaster implements IGameMaster {
     this.buttons.add(resetButton);
   }
   
-  void handleMouseClick(int x, int y) {
+  void handleMouseClick() {
     // Buttons
     for(Button b: this.buttons) {
-      if(b.tryClick(x, y))
+      if(b.tryClick())
         b.doFunction();
     }
     
@@ -79,21 +82,21 @@ class TurnMaster implements IGameMaster {
     textAlign(CENTER, CENTER);
     fill(0);
     text(displayTurn, 850, 100);
+    text("Score: " + (activeBoard.equals(board1) ? score1 : score2), 850, 150);
+    
     
     for(Button button: this.buttons) {
       button.show();
     }
   }
   
-  void nextTurn() {
-    
-  }
-  
   void handleHitCell(Cell targetCell) {
-    targetCell.hit();
-  }
-  
-  String getName() {
-    return "turn master";
+    if(targetCell.hit()){
+      if(activeBoard.equals(board1)) {
+        score1++;
+      } else {
+        score2++;
+      }
+    }
   }
 }
