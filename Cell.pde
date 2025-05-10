@@ -34,6 +34,10 @@ class Cell {
   public boolean hit(){ 
     return false;
   }
+  
+  public boolean isHit() {
+    return this.isHit;
+  }
 }
 
 class WaterCell extends Cell {
@@ -63,6 +67,11 @@ class WaterCell extends Cell {
     this.isHit = true;
     return false;
   }
+  
+  @Override
+  public boolean isHit() {
+    return this.isHit;
+  }
 }
 
 class ShipCell extends Cell {
@@ -91,5 +100,10 @@ class ShipCell extends Cell {
       return false;
     this.isHit = true;
     return true;
+  }
+  
+  @Override
+  public boolean isHit() {
+    return this.isHit;
   }
 }
