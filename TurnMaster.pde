@@ -1,7 +1,8 @@
 class TurnMaster implements IGameMaster {
   private Turn currentTurn;
   private final Board board1, board2;
-  private int score1, score2;
+  private int score1, score2, remainingShots;
+  private CanonWidget canon;
   private Board activeBoard;
   private Button resetButton, nextTurnButton;
   private ArrayList<Button> buttons;
@@ -11,6 +12,7 @@ class TurnMaster implements IGameMaster {
   };
   
   public TurnMaster(Board board1, Board board2) {
+    this.canon = new CanonWidget();
     this.score1 = 0;
     this.score2 = 0;
     this.currentTurn = Turn.PLAYER1TURN;
@@ -88,6 +90,7 @@ class TurnMaster implements IGameMaster {
     for(Button button: this.buttons) {
       button.show();
     }
+    canon.show();
   }
   
   void handleHitCell(Cell targetCell) {
