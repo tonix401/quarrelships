@@ -15,6 +15,10 @@ void mouseClicked() {
   gm.handleMouseClick();
 }
 
+void mouseDragged() {
+  gm.handleMouseDrag();
+}
+
 void keyPressed() {
   gm.handleKeyPress(key);
 }

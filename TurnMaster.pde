@@ -103,4 +103,6 @@ class TurnMaster implements IGameMaster {
       }
     }
   }
+  
+  void handleMouseDrag() {}
 }
