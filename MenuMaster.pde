@@ -104,6 +104,7 @@ class MenuMaster implements IGameMaster {
   }
   
   void handleMouseDrag() {
-    picker1.tryDragging();
+    for (ColorPicker picker : colorPickers)
+      picker.tryDragging();
   }
 }
