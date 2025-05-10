@@ -4,6 +4,7 @@ public class SetupMaster implements IGameMaster {
   private Board activeBoard;
   private Button resetButton, nextTurnButton, setRemainingButton;
   private ArrayList<Button> buttons;
+  private String player1name, player2name;
   
   ILambdaFunction resetGame = () -> {
     resetGame();
@@ -23,7 +24,10 @@ public class SetupMaster implements IGameMaster {
     }
   };
 
-  public SetupMaster() {
+  public SetupMaster(String player1name, String player2name) {
+    this.player1name = player1name;
+    this.player2name = player2name;
+    
     this.board1 = new Board(0, 255, 0);
     this.board2 = new Board(0, 0, 255);
     
@@ -38,7 +42,7 @@ public class SetupMaster implements IGameMaster {
       case PLAYER2SETUP:
         if (!board2.isAllShipsSet())
           break;
-        setGameMasterToTurnMaster(this.board1, this.board2);
+        setGameMasterToTurnMaster(this.board1, this.board2, this.player1name, this.player2name);
       default:
         return;
     }
@@ -118,11 +122,11 @@ public class SetupMaster implements IGameMaster {
     switch(currentTurn) {
       case PLAYER1SETUP:
         board1.show(true, 0, 255, 0);
-        displayTurn = "Player 1 Setup";
+        displayTurn = this.player1name + "'s Setup";
         break;
       case PLAYER2SETUP:
         board2.show(true, 0, 0, 255);
-        displayTurn = "Player 2 Setup";
+        displayTurn = this.player2name + "'s Setup";
         break;
       default:
         break;

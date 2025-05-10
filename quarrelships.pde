@@ -20,12 +20,12 @@ void keyPressed() {
   gm.handleKeyPress(key);
 }
 
-void setGameMasterToTurnMaster(Board board1, Board board2) {
-  gm = new TurnMaster(board1, board2);
+void setGameMasterToTurnMaster(Board board1, Board board2, String player1name, String player2name) {
+  gm = new TurnMaster(board1, board2, player1name, player2name);
 }
 
-void setGameMasterToSetupMaster() {
-  gm = new SetupMaster();
+void setGameMasterToSetupMaster(String player1name, String player2name) {
+  gm = new SetupMaster(player1name, player2name);
 }
 
 void resetGame() {
