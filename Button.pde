@@ -44,8 +44,9 @@ public class Button {
   }
   
   public boolean tryClick() {
-    if (!isMouseOverButton() || !isEnabled)
+    if (!isMouseOverButton() || !isEnabled) {
       return false;
+    }
     return true;
   }
   

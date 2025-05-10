@@ -44,13 +44,11 @@ class TurnMaster implements IGameMaster {
   }
   
   void handleMouseClick() {
-    // Buttons
     for(Button b: this.buttons) {
       if(b.tryClick())
         b.doFunction();
     }
     
-    // Cells on the board
     Cell targetCell = activeBoard.getCellAtMousePos();
     if(targetCell == null) return;
     handleHitCell(targetCell);
