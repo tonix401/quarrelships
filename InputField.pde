@@ -8,7 +8,7 @@ public class InputField {
   private int cursorPos = 0;
   private int frameCounter = 0;
   
-  private Pattern pattern = Pattern.compile("^[a-zA-Z0-9 _-]*$");
+  private Pattern pattern = Pattern.compile("^[a-zA-Z0-9 _-'!?&]*$");
   
   public InputField(int x, int y, int _width, int _height, String text, boolean isEnabled) {
     this.text = text;
@@ -67,7 +67,10 @@ public class InputField {
     String displayText = "";
     char[] arr = this.text.toCharArray();
     if (this.cursorPos < 0)
-      displayText = "|";
+      if (this.frameCounter < 30)
+          displayText += "|";
+        else
+          displayText += " ";
     for (int i = 0; i < this.text.length(); i++) {
       displayText += arr[i];
       if (i == cursorPos && this.isInFocus)
@@ -78,7 +81,10 @@ public class InputField {
     }
     
     if (this.isInFocus && displayText.length() == 0)
-      displayText = "|";
+      if (this.frameCounter < 30)
+          displayText += "|";
+        else
+          displayText += " ";
     
     text(displayText, (x + _width / 2), y + _height / 2);
   }
