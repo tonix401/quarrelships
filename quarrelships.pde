@@ -3,8 +3,7 @@ IGameMaster gm;
 void setup() {
   size(1000, 700);
   background(255);
-  gm = new MenuMaster();
-  
+  gm = new TitleScreenMaster();
 }
 
 void draw() {
@@ -29,5 +28,9 @@ void setGameMasterToSetupMaster() {
 }
 
 void resetGame() {
+  gm = new MenuMaster();
+}
+
+void setGameMasterToMenuMaster() {
   gm = new MenuMaster();
 }

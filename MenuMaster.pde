@@ -4,7 +4,6 @@ class MenuMaster implements IGameMaster {
   private Button startGameButton;
   private ArrayList<InputField> inputs = new ArrayList<InputField>();
   private ArrayList<Button> buttons = new ArrayList<Button>();
-  private PImage logo = loadImage("images//logo.png");
   
   ILambdaFunction startGame = () -> {
     setGameMasterToSetupMaster();
@@ -12,8 +11,8 @@ class MenuMaster implements IGameMaster {
   
   public MenuMaster() {
     this.startGameButton = new Button(width / 2 - 100, height / 2 + 60, 200, 50, "Start Game", startGame);
-    this.name1Input = new InputField(width / 2 - 100, height / 2 - 60, 200, 50, "Player 1", true);
-    this.name2Input = new InputField(width / 2 - 100, height / 2, 200, 50, "Player 2", true);
+    this.name1Input = new InputField(width / 4, height / 2, 200, 50, "Player 1", true);
+    this.name2Input = new InputField(width / 4 * 3, height / 2, 200, 50, "Player 2", true);
     
     this.inputs.add(this.name1Input);
     this.inputs.add(this.name2Input);
@@ -25,7 +24,9 @@ class MenuMaster implements IGameMaster {
       i.tryClick();
     }
     for(Button b: buttons) {
-      b.tryClick();
+      if(b.tryClick()) {
+        b.doFunction();
+      }
     }
   }
   
@@ -62,9 +63,16 @@ class MenuMaster implements IGameMaster {
     for(InputField i: inputs) {
       i.show();
     }
-    pushMatrix();
-    translate(width / 2, height / 2);
-    image(logo, width / 2, height / 2);
-    popMatrix();
+    
+    drawPerson(width / 4 , 300, 50, 255, 50);
+    drawPerson(width / 4 * 3, 300, 0, 0, 255);
+  }
+  
+  void drawPerson(int x, int y, int r, int g, int b) {
+    fill(r, g, b);
+    strokeWeight(0);
+    circle(x, y - 70, 120);
+    rect(x - 60, y , 120, 120);
+    strokeWeight(1);
   }
 }
