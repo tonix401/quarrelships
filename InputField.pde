@@ -9,7 +9,7 @@ public class InputField {
   private int cursorPos = 0;
   private int frameCounter = 0;
   
-  private Pattern pattern = Pattern.compile("^[a-zA-Z0-9 _\'!?&-]*$");
+  private Pattern pattern = Pattern.compile("^[a-zA-Z0-9 _\'!?&äÄöÖüÜß-]*$");
   
   public InputField(int x, int y, int _width, int _height, String text, boolean isEnabled) {
     this.defaultText = text;
