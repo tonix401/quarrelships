@@ -58,6 +58,8 @@ class WaterCell extends Cell {
   
   @Override
   boolean hit() {
+    if (isHit)
+      return false;
     this.isHit = true;
     return false;
   }
@@ -85,6 +87,8 @@ class ShipCell extends Cell {
   
   @Override
   boolean hit() {
+    if (isHit)
+      return false;
     this.isHit = true;
     return true;
   }
