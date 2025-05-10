@@ -8,7 +8,7 @@ class MenuMaster implements IGameMaster {
   private ArrayList<ColorPicker> colorPickers = new ArrayList<ColorPicker>();
   
   ILambdaFunction startGame = () -> {
-    setGameMasterToSetupMaster(name1Input.getText(), name2Input.getText());
+    setGameMasterToSetupMaster(name1Input.getText(), name2Input.getText(), picker1.getR(), picker1.getG(), picker1.getB(), picker2.getR(), picker2.getG(), picker2.getB());
   };
   
   ILambdaFunction togglePicker1 = () -> {

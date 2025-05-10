@@ -24,12 +24,12 @@ public class SetupMaster implements IGameMaster {
     }
   };
 
-  public SetupMaster(String player1name, String player2name) {
+  public SetupMaster(String player1name, String player2name, int p1r, int p1g, int p1b, int p2r, int p2g, int p2b) {
     this.player1name = player1name;
     this.player2name = player2name;
     
-    this.board1 = new Board(0, 255, 0);
-    this.board2 = new Board(0, 0, 255);
+    this.board1 = new Board(p1r, p1g, p1b);
+    this.board2 = new Board(p2r, p2g, p2b);
     
     ILambdaFunction nextTurn = () -> {
     switch(currentTurn) {
@@ -121,11 +121,11 @@ public class SetupMaster implements IGameMaster {
     
     switch(currentTurn) {
       case PLAYER1SETUP:
-        board1.show(true, 0, 255, 0);
+        board1.show(true, board1.r, board1.g, board1.b);
         displayTurn = this.player1name + "'s Setup";
         break;
       case PLAYER2SETUP:
-        board2.show(true, 0, 0, 255);
+        board2.show(true, board2.r, board2.g, board2.b);
         displayTurn = this.player2name + "'s Setup";
         break;
       default:

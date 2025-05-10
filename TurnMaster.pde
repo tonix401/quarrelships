@@ -66,11 +66,15 @@ class TurnMaster implements IGameMaster {
     int r = 0, g = 0, b = 0;
     switch(currentTurn) {
       case PLAYER1TURN:
-        g = 255;
+        r = board1.r;
+        g = board1.g;
+        b = board1.b;
         displayTurn = this.player1name + "'s Turn";
         break;
       case PLAYER2TURN:
-        b = 255;
+        r = board2.r;
+        g = board2.g;
+        b = board2.b;
         displayTurn = this.player2name + "'s Turn";
         break;
       default:
