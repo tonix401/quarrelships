@@ -40,6 +40,12 @@ class MenuMaster implements IGameMaster {
         case RETURN:
           input.setIsInFocus(false);
           break;
+        case LEFT:
+          input.moveCursor(true);
+          break;
+        case RIGHT:
+          input.moveCursor(false);
+          break;
         default:
           input.appendChar(key);
           break;
