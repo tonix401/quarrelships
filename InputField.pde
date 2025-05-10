@@ -6,6 +6,7 @@ public class InputField {
   private int x, y, _width, _height;
   private String text = "";
   private int cursorPos = 0;
+  private int frameCounter = 0;
   
   private Pattern pattern = Pattern.compile("^[a-zA-Z0-9 _-]*$");
   
@@ -58,6 +59,11 @@ public class InputField {
     textAlign(CENTER, CENTER);
     fill(0);
     
+    if (this.isInFocus) {
+      this.frameCounter++;
+      this.frameCounter %= 60;
+    }
+    
     String displayText = "";
     char[] arr = this.text.toCharArray();
     if (this.cursorPos < 0)
@@ -65,7 +71,10 @@ public class InputField {
     for (int i = 0; i < this.text.length(); i++) {
       displayText += arr[i];
       if (i == cursorPos && this.isInFocus)
-        displayText += "|";
+        if (this.frameCounter < 30)
+          displayText += "|";
+        else
+          displayText += " ";
     }
     
     if (this.isInFocus && displayText.length() == 0)
