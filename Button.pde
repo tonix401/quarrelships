@@ -32,7 +32,7 @@ public class Button {
   
   public void show() {
     if(!isEnabled) return;
-    if (isMouseOverButton())
+    if (!isMouseOverButton())
       fill(255);
     else
       fill(200);
@@ -54,6 +54,6 @@ public class Button {
   }
   
   boolean isMouseOverButton() {
-    return mouseX < this.x || mouseX > this.x + _width || mouseY < this.y || mouseY > this.y + _height;
+    return !(mouseX < this.x || mouseX > this.x + _width || mouseY < this.y || mouseY > this.y + _height);
   }
 }

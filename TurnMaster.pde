@@ -6,12 +6,15 @@ class TurnMaster implements IGameMaster {
   private Board activeBoard;
   private Button resetButton, nextTurnButton;
   private ArrayList<Button> buttons;
+  private String player1name, player2name;
   
   ILambdaFunction resetGame = () -> {
     resetGame();
   };
   
-  public TurnMaster(Board board1, Board board2) {
+  public TurnMaster(Board board1, Board board2, String player1name, String player2name) {
+    this.player1name = player1name;
+    this.player2name = player2name;
     this.canon = new CanonWidget();
     this.score1 = 0;
     this.score2 = 0;
@@ -66,14 +69,14 @@ class TurnMaster implements IGameMaster {
     switch(currentTurn) {
       case PLAYER1TURN:
         g = 255;
-        displayTurn = "Player 1 Turn";
+        displayTurn = this.player1name + "'s Turn";
         break;
       case PLAYER2TURN:
         b = 255;
-        displayTurn = "Player 2 Turn";
+        displayTurn = this.player2name + "'s Turn";
         break;
       default:
-        println("ERROR | wrong turn" + currentTurn);
+        println("ERROR | wrong turn:" + currentTurn);
     }
     
     this.activeBoard.show(false, r, g, b);
