@@ -38,7 +38,7 @@ class MenuMaster implements IGameMaster {
         case BACKSPACE:
           input.spliceChar();
           break;
-        case RETURN:
+        case ENTER:
           input.setIsInFocus(false);
           break;
         case LEFT:
