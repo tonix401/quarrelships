@@ -30,7 +30,6 @@ class MenuMaster implements IGameMaster {
   }
   
   void handleKeyPress(char key) {
-    //println(key);
     for (InputField input : inputs) {
       if (!input.getIsInFocus())
         continue;
