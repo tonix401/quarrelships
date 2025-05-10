@@ -33,6 +33,8 @@ public class InputField {
   
   void setIsInFocus(boolean isInFocus) {
     this.isInFocus = isInFocus;
+    if (isInFocus)
+      this.cursorPos = text.length() - 1;
   }
   
   boolean getIsInFocus() {
@@ -58,11 +60,16 @@ public class InputField {
     
     String displayText = "";
     char[] arr = this.text.toCharArray();
+    if (this.cursorPos < 0)
+      displayText = "|";
     for (int i = 0; i < this.text.length(); i++) {
+      displayText += arr[i];
       if (i == cursorPos && this.isInFocus)
         displayText += "|";
-      displayText += arr[i];
     }
+    
+    if (this.isInFocus && displayText.length() == 0)
+      displayText = "|";
     
     text(displayText, (x + _width / 2), y + _height / 2);
   }
@@ -81,16 +88,20 @@ public class InputField {
   }
   
   public void appendChar(char c) {
+    println(pattern.matcher(key + "").find() + " " + key);
     if (this.text.length() >= 15 || !(pattern.matcher(key + "").find()))
       return;
     char[] textChars = this.text.toCharArray();
     this.text = "";
-    for (int i = 0; i < textChars.length; i++) {
+    
+    for (int i = -1; i < textChars.length; i++) {
+      if (i > -1)
+        this.text += textChars[i];
       if (i == this.cursorPos) {
         this.text += c;
       }
-      this.text += textChars[i];
     }
+    this.cursorPos++;
   }
   
   public void spliceChar() {
@@ -107,9 +118,9 @@ public class InputField {
   }
   
   public void moveCursor(boolean doMoveLeft) {
-    if (doMoveLeft && this.cursorPos > 0) {
+    if (doMoveLeft && this.cursorPos >= 0) {
       this.cursorPos--;
-    } else if (this.cursorPos < 15){
+    } else if (this.cursorPos < min(15, this.text.length() - 1)){
       this.cursorPos++;
     }
   }
