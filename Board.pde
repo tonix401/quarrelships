@@ -40,10 +40,10 @@ class Board {
       cell.show();
     if (getCellAtMousePos() != null)
       getCellAtMousePos().show(r, g, b, 100);
-    if (showBoats)
-      for (Ship ship : setShips) {
+    for (Ship ship : setShips) {
+      if (showBoats || checkShipDead(ship))
         ship.show(this, false);
-      }
+    }
     if (this.activeShip == null)
       return;
     if (getCellAtMousePos() != null)
@@ -128,5 +128,13 @@ class Board {
   
   public void decreaseHitPoints() {
     this.amtShipCells--;
+  }
+  
+  private boolean checkShipDead(Ship ship) {
+    for (ShipBlock block : ship.blocks) {
+      if (!(getCellAt(block.getAbsoluteX(ship.getX()), block.getAbsoluteY(ship.getY())).isHit()))
+        return false;
+    }
+    return true;
   }
 }
