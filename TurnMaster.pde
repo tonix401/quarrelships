@@ -1,7 +1,7 @@
 class TurnMaster implements IGameMaster {
   private Turn currentTurn;
   private final Board board1, board2;
-  private int score1, score2, remainingShots;
+  private int score1, score2, remainingShots = 1;
   private CanonWidget canon;
   private Board activeBoard;
   private Button resetButton, nextTurnButton;
@@ -28,11 +28,13 @@ class TurnMaster implements IGameMaster {
       switch(currentTurn) {
         case PLAYER1TURN:
           this.currentTurn = Turn.PLAYER2TURN;
-          this.activeBoard = this.board2;
+          this.activeBoard = this.board1;
+          this.remainingShots = 1;
           break;
         case PLAYER2TURN:
           this.currentTurn = Turn.PLAYER1TURN;
-          this.activeBoard = board1;
+          this.activeBoard = board2;
+          this.remainingShots = 1;
           break;
         default:
       }
@@ -55,6 +57,7 @@ class TurnMaster implements IGameMaster {
     Cell targetCell = activeBoard.getCellAtMousePos();
     if(targetCell == null) return;
     handleHitCell(targetCell);
+    
   }
   
   void handleKeyPress(char key) {
@@ -91,6 +94,10 @@ class TurnMaster implements IGameMaster {
     text(displayTurn, 850, 100);
     text("Score: " + (activeBoard.equals(board1) ? score1 : score2), 850, 150);
     
+    if (remainingShots <= 0)
+      this.nextTurnButton.setIsEnabled(true);
+    else
+      this.nextTurnButton.setIsEnabled(false);
     
     for(Button button: this.buttons) {
       button.show();
@@ -99,7 +106,14 @@ class TurnMaster implements IGameMaster {
   }
   
   void handleHitCell(Cell targetCell) {
+    if (remainingShots <= 0)
+      return;
+    if (!targetCell.isHit()) {
+      println(targetCell.isHit());
+      remainingShots--;
+    }
     if(targetCell.hit()) {
+      remainingShots++;
       if(activeBoard.equals(board1)) {
         score1++;
       } else {
