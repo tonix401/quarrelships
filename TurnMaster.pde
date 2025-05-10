@@ -99,7 +99,7 @@ class TurnMaster implements IGameMaster {
   }
   
   void handleHitCell(Cell targetCell) {
-    if(targetCell.hit()){
+    if(targetCell.hit()) {
       if(activeBoard.equals(board1)) {
         score1++;
       } else {
