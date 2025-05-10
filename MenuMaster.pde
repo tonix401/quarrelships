@@ -29,9 +29,25 @@ class MenuMaster implements IGameMaster {
     }
   }
   
-  void handleKeyPress(char key){}
+  void handleKeyPress(char key) {
+    for (InputField input : inputs) {
+      if (!input.getIsInFocus())
+        continue;
+      switch (key) {
+        case BACKSPACE:
+          input.spliceChar();
+          break;
+        case RETURN:
+          input.setIsInFocus(false);
+          break;
+        default:
+          input.appendChar(key);
+          break;
+      }
+    }
+  }
   
-  void show(){
+  void show() {
     for(Button b: buttons) {
       b.show();
     }
