@@ -4,6 +4,9 @@
 # Log file
 *.log
 
+# Autosaves from processing
+*.autosave
+
 # BlueJ files
 *.ctxt
 
