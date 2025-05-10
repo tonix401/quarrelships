@@ -5,13 +5,14 @@ public class InputField {
   private boolean isInFocus = false;
   private int x, y, _width, _height;
   private String text = "";
+  private String defaultText = "";
   private int cursorPos = 0;
   private int frameCounter = 0;
   
   private Pattern pattern = Pattern.compile("^[a-zA-Z0-9 _\'!?&-]*$");
   
   public InputField(int x, int y, int _width, int _height, String text, boolean isEnabled) {
-    this.text = text;
+    this.defaultText = text;
     this.cursorPos = text.length() - 1;
     this.isEnabled = isEnabled;
     this.x = x;
@@ -64,9 +65,6 @@ public class InputField {
       this.frameCounter %= 60;
     }
     
-    if (this.text.length() <= 0 && !isInFocus)
-      return;
-    
     String displayText = "";
     char[] arr = this.text.toCharArray();
     if (this.cursorPos < 0)
@@ -89,7 +87,10 @@ public class InputField {
         else
           displayText += " ";
     
-    text(displayText, (x + _width / 2), y + _height / 2);
+    if (!isInFocus && this.text.length() == 0)
+      text(this.defaultText, (x + _width / 2), y + _height / 2);
+    else
+      text(displayText, (x + _width / 2), y + _height / 2);
   }
   
   public boolean tryClick() {
@@ -141,5 +142,11 @@ public class InputField {
     } else if (!doMoveLeft && this.cursorPos < min(15, this.text.length() - 1)){
       this.cursorPos++;
     }
+  }
+  
+  public String getText() {
+    if (this.text.length() == 0)
+      return this.defaultText;
+    return this.text;
   }
 }

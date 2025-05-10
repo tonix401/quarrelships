@@ -6,13 +6,13 @@ class MenuMaster implements IGameMaster {
   private ArrayList<Button> buttons = new ArrayList<Button>();
   
   ILambdaFunction startGame = () -> {
-    setGameMasterToSetupMaster();
+    setGameMasterToSetupMaster(name1Input.getText(), name2Input.getText());
   };
   
   public MenuMaster() {
-    this.startGameButton = new Button(width / 2 - 100, height / 2 + 60, 200, 50, "Start Game", startGame);
-    this.name1Input = new InputField(width / 4, height / 2, 200, 50, "Player 1", true);
-    this.name2Input = new InputField(width / 4 * 3, height / 2, 200, 50, "Player 2", true);
+    this.startGameButton = new RoundButton(width / 2, height / 2, 120, "Start Game", startGame);
+    this.name1Input = new InputField(width / 4 - 100, height / 2 + 90, 200, 50, "Player 1", true);
+    this.name2Input = new InputField(width / 4 * 3 - 100, height / 2 + 90, 200, 50, "Player 2", true);
     
     this.inputs.add(this.name1Input);
     this.inputs.add(this.name2Input);
@@ -31,7 +31,6 @@ class MenuMaster implements IGameMaster {
   }
   
   void handleKeyPress(char key) {
-    //println(key);
     for (InputField input : inputs) {
       if (!input.getIsInFocus())
         continue;
@@ -59,11 +58,9 @@ class MenuMaster implements IGameMaster {
     for(Button b: buttons) {
       b.show();
     }
-    
     for(InputField i: inputs) {
       i.show();
     }
-    
     drawPerson(width / 4 , 300, 50, 255, 50);
     drawPerson(width / 4 * 3, 300, 0, 0, 255);
   }
