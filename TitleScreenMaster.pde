@@ -31,4 +31,5 @@ class TitleScreenMaster implements IGameMaster{
   }
   
   void handleKeyPress(char key) {}
+  void handleMouseDrag() {}
 }

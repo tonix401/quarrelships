@@ -154,4 +154,6 @@ public class SetupMaster implements IGameMaster {
       b.show();
     }
   }
+  
+  void handleMouseDrag() {}
 }
