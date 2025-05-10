@@ -55,7 +55,16 @@ public class InputField {
     textSize(20);
     textAlign(CENTER, CENTER);
     fill(0);
-    text(this.text, (x + _width / 2), y + _height / 2);
+    
+    String displayText = "";
+    char[] arr = this.text.toCharArray();
+    for (int i = 0; i < this.text.length(); i++) {
+      if (i == cursorPos && this.isInFocus)
+        displayText += "|";
+      displayText += arr[i];
+    }
+    
+    text(displayText, (x + _width / 2), y + _height / 2);
   }
   
   public boolean tryClick() {
@@ -85,7 +94,7 @@ public class InputField {
   }
   
   public void spliceChar() {
-    if (this.cursorPos <= 0)
+    if (this.cursorPos < 0)
       return;
     char[] textChars = this.text.toCharArray();
     this.text = "";
