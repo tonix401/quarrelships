@@ -77,6 +77,7 @@ class Ship {
     }
     pushMatrix();
     translate(centerX * 70 + 35, centerY * 70 + 35);
+    imageMode(CORNER);
     rotate(rotation * (PI / 2));
     image(shipSprite, -shipSprite.width / 2, -shipSprite.height / 2);
     popMatrix();

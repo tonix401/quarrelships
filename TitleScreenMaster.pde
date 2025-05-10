@@ -25,9 +25,8 @@ class TitleScreenMaster implements IGameMaster{
   
   void handleMouseClick() {
     for(Button b: buttons) {
-      if(!b.tryClick()) {
+      if(b.tryClick())
         b.doFunction();
-      }
     }
   }
   
