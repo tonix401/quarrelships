@@ -3,6 +3,7 @@ class TurnMaster implements IGameMaster {
   private final Board board1, board2;
   private int score1, score2, remainingShots = 1;
   private CanonWidget canon;
+  private CanonBall ball;
   private Board activeBoard;
   private Button resetButton, nextTurnButton;
   private ArrayList<Button> buttons;
@@ -57,12 +58,9 @@ class TurnMaster implements IGameMaster {
     Cell targetCell = activeBoard.getCellAtMousePos();
     if(targetCell == null) return;
     handleHitCell(targetCell);
-    
   }
   
-  void handleKeyPress(char key) {
-    
-  }
+  void handleKeyPress(char key) {}
   
   void show() {
     String displayTurn = "";
@@ -102,6 +100,8 @@ class TurnMaster implements IGameMaster {
     for(Button button: this.buttons) {
       button.show();
     }
+    if (ball != null)
+      ball.nextFrame();
     canon.show();
   }
   
@@ -109,8 +109,8 @@ class TurnMaster implements IGameMaster {
     if (remainingShots <= 0)
       return;
     if (!targetCell.isHit()) {
-      println(targetCell.isHit());
       remainingShots--;
+      ball = new CanonBall(targetCell.getX() + 35, targetCell.getY() + 35);
     }
     if(targetCell.hit()) {
       remainingShots++;
