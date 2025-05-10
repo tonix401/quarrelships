@@ -31,6 +31,14 @@ class Cell {
     return y / 70;
   }
   
+  public int getX() {
+    return this.x;
+  }
+  
+  public int getY() {
+    return this.y;
+  }
+  
   public boolean hit(){ 
     return false;
   }
