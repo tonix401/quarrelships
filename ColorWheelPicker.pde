@@ -34,10 +34,11 @@ class ColorWheelPicker {
     if(!this.isEnabled)
       return;
     
-    for (float angle = 0; angle < TWO_PI; angle += 0.005) {
+    for (float angle = 0; angle < TWO_PI; angle += 0.02) {
       float cx = x + cos(angle) * radius;
       float cy = y + sin(angle) * radius;
       final color currColor = colorFromAngle(angle);
+      strokeWeight(3);
       stroke(currColor);
       line(x, y, cx, cy);
       
