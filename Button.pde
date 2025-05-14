@@ -78,6 +78,8 @@ class RoundButton extends Button {
   
   @Override
   public void show() {
+    stroke(0);
+    strokeWeight(1);
     if (isMouseOverButton())
       fill(200);
     else
