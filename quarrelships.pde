@@ -13,7 +13,12 @@ void draw() {
 }
 
 void mouseClicked() {
-  gm.handleMouseClick();
+  try {
+      gm.handleMouseClick();
+  }
+  catch(Exception e){
+    print(e);
+  }
 }
 
 void mouseDragged() {
@@ -38,4 +43,8 @@ void resetGame() {
 
 void setGameMasterToMenuMaster() {
   gm = new MenuMaster();
+}
+
+void setGameMasterToEndScreen(String winner) {
+  gm = new GameOverMaster(winner);
 }
