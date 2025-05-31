@@ -38,7 +38,11 @@ void setGameMasterToSetupMaster(String player1name, String player2name, int p1r,
 }
 
 void resetGame() {
-  gm = new MenuMaster();
+  setup();
+}
+
+void exitGame() {
+  exit();
 }
 
 void setGameMasterToMenuMaster() {
