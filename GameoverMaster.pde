@@ -14,17 +14,28 @@ class GameOverMaster implements IGameMaster{
     this.buttons.add(startButton);
   }
   
-  void show() {
-    pushMatrix();
-    text("{this.winner} won !", 0, 0);
-    translate(width / 2, height / 2);
-    image.resize(400, 400);
-    image(image, -image.width / 2 , -image.height / 2 - 40);
-    popMatrix();
-    for(Button b: buttons) {
-      b.show();
-    }
+void show() {
+  pushMatrix();
+  translate(width / 2, height / 2);
+  
+  // Draw the image centered
+  image.resize(400, 400);
+  image(image, -image.width / 2, -image.height / 2 - 40);
+  
+  // Draw the winner text above the image
+  textAlign(CENTER, CENTER);
+  textSize(32);
+  fill(255); // white
+  text(winner + " won!", 0, -image.height / 2 - 100);
+  
+  popMatrix();
+  
+  // Show buttons
+  for (Button b : buttons) {
+    b.show();
   }
+}
+
   
   void handleMouseClick() {
     for(Button b: buttons) {
