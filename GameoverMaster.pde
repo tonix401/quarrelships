@@ -1,40 +1,55 @@
 class GameOverMaster implements IGameMaster{
   private PImage image = loadImage("images/gameover.png");
-  private Button startButton;
+  private Button restartButton;
+  private Button exitGameButton;
   private ArrayList<Button> buttons = new ArrayList<Button>();
   private String winner;
   
   private ILambdaFunction startGame = () -> {
-    setGameMasterToMenuMaster();
+    resetGame();
   };
+  
+  private ILambdaFunction endGame = () -> {
+    exitGame();
+  };
+  
+  
   
   public GameOverMaster(String winner) {
     this.winner = winner;
-    this.startButton = new Button(width / 2 - 100, height / 2 + 200, 200, 50, "Start Game", startGame);
-    this.buttons.add(startButton);
+    int gap = 20;
+    int buttonWidth = 200;
+    int totalWidth = buttonWidth * 2 + gap;
+    int startX = (width / 2) - (totalWidth / 2);
+    int yPos = height / 2 + 200;
+
+    this.restartButton = new Button(startX, yPos, buttonWidth, 50, "Start Game", startGame);
+    this.exitGameButton = new Button(startX + buttonWidth + gap, yPos, buttonWidth, 50, "Exit Game", endGame);
+    this.buttons.add(restartButton);
+    this.buttons.add(exitGameButton);
   }
   
 void show() {
   pushMatrix();
   translate(width / 2, height / 2);
-  
-  // Draw the image centered
-  image.resize(400, 400);
-  image(image, -image.width / 2, -image.height / 2 - 40);
-  
-  // Draw the winner text above the image
+
+  // Draw the image centered, resized to 400x400 without changing the original
+  image(image, -400 / 2, -400 / 2 - 40, 400, 400);
+
+  // Draw the winner text above the image with custom color
   textAlign(CENTER, CENTER);
   textSize(32);
-  fill(255); // white
-  text(winner + " won!", 0, -image.height / 2 - 100);
-  
+  fill(30);  // dark grey
+  text(winner + " won!", 0, -400 / 2 - 100);
+
   popMatrix();
-  
+
   // Show buttons
   for (Button b : buttons) {
     b.show();
   }
 }
+
 
   
   void handleMouseClick() {
