@@ -1,0 +1,8 @@
+package components.board;
+
+public enum Turn {
+    PLAYER1SETUP,
+    PLAYER2SETUP,
+    PLAYER1TURN,
+    PLAYER2TURN
+}
