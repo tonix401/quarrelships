@@ -22,26 +22,26 @@ public class Ship {
             case DESTROYER:
                 blocks.add(new ShipBlock(0, 0));
                 blocks.add(new ShipBlock(1, 0));
-                shipSprite = qs.loadImage("../../resources/destroyer.png");
+                shipSprite = qs.loadImage("resources/destroyer.png");
                 break;
             case SUBMARINE:
                 blocks.add(new ShipBlock(-1, 0));
                 blocks.add(new ShipBlock(0, 0));
                 blocks.add(new ShipBlock(1, 0));
-                shipSprite = qs.loadImage("../../resources/submarine.png");
+                shipSprite = qs.loadImage("resources/submarine.png");
                 break;
             case CRUISER:
                 blocks.add(new ShipBlock(-1, 0));
                 blocks.add(new ShipBlock(0, 0));
                 blocks.add(new ShipBlock(1, 0));
-                shipSprite = qs.loadImage("../../resources/cruiser.png");
+                shipSprite = qs.loadImage("resources/cruiser.png");
                 break;
             case BATTLESHIP:
                 blocks.add(new ShipBlock(-2, 0));
                 blocks.add(new ShipBlock(-1, 0));
                 blocks.add(new ShipBlock(0, 0));
                 blocks.add(new ShipBlock(1, 0));
-                shipSprite = qs.loadImage("../../resources/battleship.png");
+                shipSprite = qs.loadImage("resources/battleship.png");
                 break;
             case CARRIER:
                 blocks.add(new ShipBlock(-2, 0));
@@ -49,7 +49,7 @@ public class Ship {
                 blocks.add(new ShipBlock(0, 0));
                 blocks.add(new ShipBlock(1, 0));
                 blocks.add(new ShipBlock(2, 0));
-                shipSprite = qs.loadImage("../../resources/carrier.png");
+                shipSprite = qs.loadImage("resources/carrier.png");
                 break;
         }
     }
