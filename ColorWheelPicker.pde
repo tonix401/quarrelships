@@ -28,6 +28,9 @@ class ColorWheelPicker {
   
   void setRGB(int r, int g, int b){
     this.selectedColor = color(r, g, b);
+    float angle = angleFromColor(selectedColor);
+    currCX = x + cos(angle) * radius;
+    currCY = y + sin(angle) * radius;
   }
 
   void show() {
@@ -56,12 +59,13 @@ class ColorWheelPicker {
     stroke(0);
         
     fill(selectedColor);
-    strokeWeight(5);
+    strokeWeight(6);
     stroke(160, 210, 255);
     circle(x, y, innerRadius * 2);
     noFill();
     circle(x, y, radius * 2);
     strokeWeight(1);
+    stroke(0);
   }
 
   void update() {
@@ -72,6 +76,8 @@ class ColorWheelPicker {
       float angle = atan2(mouseY - y, mouseX - x);
       selectedColor = colorFromAngle(angle);
       complementAngle = (angle + PI);
+      currCX = x + cos(angle) * radius;
+      currCY = y + sin(angle) * radius;
     }
   }
 
@@ -82,6 +88,14 @@ class ColorWheelPicker {
     color c = color(hue, 100, 100);
     colorMode(RGB, 255);
     return c;
+  }
+  
+  float angleFromColor(color c) {
+    colorMode(HSB, 360, 100, 100);
+    float angle = map(hue(c), 0, 360, 0, TWO_PI);
+    colorMode(RGB, 255);
+    println(angle);
+    return angle;
   }
 
   color getSelectedColor() {
