@@ -4,7 +4,76 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ae97602-c6c4-45d1-a7bc-3cf30d68a809" name="Changes" comment="" />
+    <list default="true" id="2ae97602-c6c4-45d1-a7bc-3cf30d68a809" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/core_4_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qs.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/battleship.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/carrier.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cruiser.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/destroyer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/gameover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/submarine.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/board/Board.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/board/CanonBall.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/board/CanonWidget.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/board/Cell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/board/ShipCell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/board/Turn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/board/WaterCell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/menu/Button.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/menu/ColorWheelPicker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/menu/InputField.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/menu/RoundButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ship/ShipBlock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ship/ShipTypes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/masters/GameOverMaster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/masters/IGameMaster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/masters/ILambdaFunction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/masters/MenuMaster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/masters/QuarrelShips.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/masters/SetupMaster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/masters/TitleScreenMaster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/masters/TurnMaster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/quarrelships.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Button.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CanonBall.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CanonWidget.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cell.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ColorPicker.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ColorWheelPicker.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameoverMaster.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/IGameMaster.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ILambdaFunction.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InputField.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MenuMaster.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SetupMaster.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ship.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShipBlock.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShipTypes.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TitleScreenMaster.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Turn.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TurnMaster.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/battleship.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/carrier.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/cruiser.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/destroyer.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/gameover.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/submarine.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quarrelships.pde" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ship/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ship/Ship.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +104,7 @@
   "keyToString": {
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "normal-java",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/twe/Studium/Java/qs",
     "node.js.detected.package.eslint": "true",
