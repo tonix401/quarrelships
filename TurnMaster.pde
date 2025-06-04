@@ -120,9 +120,9 @@ class TurnMaster implements IGameMaster {
         score2++;
       }
       if (gameOver()){
-        try{
+        try {
           handleGameOver();
-        }catch (Exception e){
+        } catch (Exception e) {
           println("Caught exception:", e);
           resetGame(); // in this case if it ever occurs we just go to the main screen without showing the end screen -> better exception management for nicer solution
         }
@@ -132,9 +132,9 @@ class TurnMaster implements IGameMaster {
   
   void handleMouseDrag() {}
   
-  boolean gameOver(){
-     for (Ship ship: this.activeBoard.setShips) {
-       if (! this.activeBoard.checkShipDead(ship)){
+  boolean gameOver() {
+     for (Ship ship : this.activeBoard.setShips) {
+       if (!this.activeBoard.checkShipDead(ship)) {
          return false;
        }
      }
@@ -145,14 +145,15 @@ class TurnMaster implements IGameMaster {
     String winner = "";
     switch(this.currentTurn) {
       case PLAYER1TURN:
-        winner = "Player 1";
+        winner = this.player1name;
         break;
       case PLAYER2TURN:
-        winner = "Player 2";
+        winner = this.player2name;
         break;
       default:
         throw new IllegalStateException("Invalid winner after gameover in TurnMaster");
     }
+    println(winner);
     setGameMasterToEndScreen(winner);
   }
 }

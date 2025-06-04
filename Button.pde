@@ -39,6 +39,7 @@ public class Button {
   
   public void show() {
     if(!isEnabled) return;
+    stroke(0);
     if (isMouseOverButton())
       fill(200);
     else
