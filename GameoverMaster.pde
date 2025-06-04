@@ -13,8 +13,6 @@ class GameOverMaster implements IGameMaster{
     exitGame();
   };
   
-  
-  
   public GameOverMaster(String winner) {
     this.winner = winner;
     int gap = 20;
@@ -23,7 +21,7 @@ class GameOverMaster implements IGameMaster{
     int startX = (width / 2) - (totalWidth / 2);
     int yPos = height / 2 + 200;
 
-    this.restartButton = new Button(startX, yPos, buttonWidth, 50, "Start Game", startGame);
+    this.restartButton = new Button(startX, yPos, buttonWidth, 50, "Play Again?", startGame);
     this.exitGameButton = new Button(startX + buttonWidth + gap, yPos, buttonWidth, 50, "Exit Game", endGame);
     this.buttons.add(restartButton);
     this.buttons.add(exitGameButton);
@@ -46,12 +44,10 @@ void show() {
 
   // Show buttons
   for (Button b : buttons) {
-    b.show();
+      b.show();
+    }
   }
-}
 
-
-  
   void handleMouseClick() {
     for(Button b: buttons) {
       if(b.tryClick())
