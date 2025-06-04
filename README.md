@@ -1,2 +1,0 @@
-# quarrelships
-battleships knockoff
