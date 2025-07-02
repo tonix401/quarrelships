@@ -9,28 +9,66 @@ import java.util.ArrayList;
 
 import static processing.core.PConstants.*;
 
+/**
+ * Game master responsible for the main menu and player setup.
+ * This screen allows players to enter their names and choose their colors
+ * before starting the game.
+ * 
+ * The menu provides:
+ * - Input fields for player names
+ * - Color pickers for each player
+ * - Visual preview of player colors
+ * - Start game functionality
+ * 
+ * @author QuarrelShips Development Team
+ * @version 1.0
+ */
 public class MenuMaster implements IGameMaster {
+    /** Reference to the main QuarrelShips game instance */
     private QuarrelShips qs;
+    
+    /** Input field for player 1's name */
     private InputField name1Input;
+    
+    /** Input field for player 2's name */
     private InputField name2Input;
+    
+    /** Start game button and color picker toggle buttons */
     private Button startGameButton, changeColorP1, changeColorP2;
+    
+    /** Color pickers for each player */
     private ColorWheelPicker picker1, picker2;
+    
+    /** List of all color pickers for easy management */
     private final ArrayList<ColorWheelPicker> colorPickers = new ArrayList<ColorWheelPicker>();
+    
+    /** List of all input fields for easy management */
     private final ArrayList<InputField> inputs = new ArrayList<InputField>();
+    
+    /** List of all buttons for easy management */
     private final ArrayList<Button> buttons = new ArrayList<Button>();
 
+    /** Lambda function to start the game with selected player settings */
     ILambdaFunction startGame = () -> {
         qs.setGameMasterToSetupMaster(name1Input.getText(), name2Input.getText(), picker1.getR(), picker1.getG(), picker1.getB(), picker2.getR(), picker2.getG(), picker2.getB());
     };
 
+    /** Lambda function to toggle player 1's color picker */
     ILambdaFunction togglePicker1 = () -> {
         picker1.setIsEnabled(!picker1.getIsEnabled());
     };
 
+    /** Lambda function to toggle player 2's color picker */
     ILambdaFunction togglePicker2 = () -> {
         picker2.setIsEnabled(!picker2.getIsEnabled());
     };
 
+    /**
+     * Creates a new menu master with all UI components.
+     * Sets up input fields, buttons, and color pickers for both players.
+     * 
+     * @param qs The main QuarrelShips game instance
+     */
     public MenuMaster(QuarrelShips qs) {
         this.qs = qs;
         this.startGameButton = new RoundButton(qs, qs.width / 2, qs.height / 2, 120, "Start Game", startGame);
@@ -53,6 +91,10 @@ public class MenuMaster implements IGameMaster {
         this.buttons.add(this.changeColorP2);
     }
 
+    /**
+     * Handles mouse click events on the menu.
+     * Processes clicks on input fields and buttons.
+     */
     public void handleMouseClick(){
         for(InputField i: inputs){
             i.tryClick();
@@ -64,6 +106,12 @@ public class MenuMaster implements IGameMaster {
         }
     }
 
+    /**
+     * Handles keyboard input for text entry and navigation.
+     * Processes text input, backspace, enter, and arrow keys for input fields.
+     * 
+     * @param key The character representing the key that was pressed
+     */
     public void handleKeyPress(char key) {
         for (InputField input : inputs) {
             if (!input.getIsInFocus())
@@ -88,8 +136,15 @@ public class MenuMaster implements IGameMaster {
         }
     }
 
+    /**
+     * Handles mouse drag events. No mouse dragging is processed on the menu.
+     */
     public void handleMouseDrag(){}
 
+    /**
+     * Renders the menu screen.
+     * Updates color pickers, displays all UI elements, and draws player previews.
+     */
     public void show() {
         for (ColorWheelPicker picker : colorPickers) {
             picker.update();
@@ -107,6 +162,15 @@ public class MenuMaster implements IGameMaster {
         }
     }
 
+    /**
+     * Draws a visual representation of a player with their chosen color.
+     * 
+     * @param x X coordinate for the player figure
+     * @param y Y coordinate for the player figure
+     * @param r Red color component (0-255)
+     * @param g Green color component (0-255)
+     * @param b Blue color component (0-255)
+     */
     public void drawPerson(int x, int y, int r, int g, int b) {
         qs.fill(r, g, b);
         qs.noStroke();

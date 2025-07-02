@@ -3,12 +3,8 @@ package masters;
 import components.board.*;
 import components.menu.*;
 import components.ship.*;
-import processing.core.*;
-import processing.data.*;
-import processing.event.*;
-import processing.opengl.*;
 
-import java.util.regex.*;
+
 import java.util.ArrayList;
 
 import static processing.core.PConstants.CENTER;
