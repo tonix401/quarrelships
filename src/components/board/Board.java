@@ -1,32 +1,69 @@
 package components.board;
 
 import components.ship.Ship;
-import components.ship.ShipBlock;
-import components.ship.ShipTypes;
 import masters.QuarrelShips;
 import java.util.ArrayList;
 
+/**
+ * REFACTORED: Represents a game board in the QuarrelShips (Battleships) game.
+ * 
+ * BEFORE: This class violated the Single Responsibility Principle by handling:
+ * - Cell grid management
+ * - Ship placement logic
+ * - Rendering/display logic
+ * - Game state tracking
+ * - Board conversion logic
+ * 
+ * AFTER: Now uses composition with specialized classes:
+ * - BoardRenderer: Handles all rendering responsibilities
+ * - BoardLogic: Handles game logic and cell operations
+ * - ShipManager: Manages ship placement and ship-related operations
+ * 
+ * This follows the Single Responsibility Principle and makes the code more
+ * maintainable, testable, and follows separation of concerns.
+ * 
+ * @author QuarrelShips Development Team
+ * @version 2.0 - Refactored to eliminate God Class smell
+ */
 public class Board {
-    private final QuarrelShips qs;
+    /** List of all cells on the board */
     private ArrayList<Cell> cells = new ArrayList<Cell>();
+    
+    /** List of cells formatted for turn-based gameplay (ship/water cells) */
     private final ArrayList<Cell> formattedCells = new ArrayList<Cell>();
-    private final ArrayList<Ship> setShips = new ArrayList<Ship>();
-    private final ArrayList<Ship> unsetShips = new ArrayList<Ship>();
-    private Ship activeShip;
-    private final int r, g, b;
+    
+    /** Number of ship cells on the board (used for win condition) */
     private int amtShipCells = 0;
+    
+    // AFTER: Composition with specialized components
+    /** Handles all rendering responsibilities */
+    private final BoardRenderer renderer;
+    
+    /** Handles game logic and cell operations */
+    private final BoardLogic logic;
+    
+    /** Manages ship placement and operations */
+    private final ShipManager shipManager;
 
+    /**
+     * Creates a new board with the specified color theme.
+     * Initializes the 10x10 grid of cells and sets up the specialized components.
+     * 
+     * AFTER: Now delegates responsibilities to specialized components instead of
+     * handling everything directly.
+     * 
+     * @param qs The main QuarrelShips game instance
+     * @param r Red component of the board's color theme (0-255)
+     * @param g Green component of the board's color theme (0-255)
+     * @param b Blue component of the board's color theme (0-255)
+     */
     public Board(QuarrelShips qs, int r, int g, int b) {
-        this.qs = qs;
-        this.activeShip = new Ship(qs, ShipTypes.DESTROYER);
-        this.unsetShips.add(new Ship(qs, ShipTypes.SUBMARINE));
-        this.unsetShips.add(new Ship(qs, ShipTypes.CRUISER));
-        this.unsetShips.add(new Ship(qs, ShipTypes.BATTLESHIP));
-        this.unsetShips.add(new Ship(qs, ShipTypes.CARRIER));
-
-        this.r = r;
-        this.g = g;
-        this.b = b;
+        // AFTER: Initialize specialized components
+        this.renderer = new BoardRenderer(qs, r, g, b);
+        this.logic = new BoardLogic(qs);
+        this.shipManager = new ShipManager(qs);
+        
+        // Initialize the 10x10 grid of cells
         for (int i = 0; i < qs.height; i += qs.height / 10) {
             for (int j = 0; j < qs.height; j += qs.height / 10) {
                 cells.add(new Cell(qs, qs.height / 10, i, j));
@@ -34,124 +71,142 @@ public class Board {
         }
     }
 
+    /**
+     * Gets the cell at the specified grid coordinates.
+     * AFTER: Delegates to BoardLogic component.
+     */
     public Cell getCellAt(int x, int y) {
-        if (x < 0 || x >= 10 || y < 0 || y >= 10)
-            return null;
-        return cells.get(y + x * 10);
+        return logic.getCellAt(cells, x, y);
     }
 
+    /**
+     * Gets the cell at the current mouse position.
+     * AFTER: Delegates to BoardLogic component.
+     */
     public Cell getCellAtMousePos() {
-        return getCellAt(qs.mouseX / 70, qs.mouseY / 70);
+        return logic.getCellAtMousePos(cells);
     }
 
+    /**
+     * Displays the board with the specified color highlighting and ship visibility.
+     * AFTER: Delegates to BoardRenderer component.
+     */
     public void show(boolean showBoats, int r, int g, int b) {
-        for (Cell cell : this.cells)
-            cell.show();
-        if (getCellAtMousePos() != null)
-            getCellAtMousePos().show(r, g, b, 100);
-        for (Ship ship : setShips) {
-            if (showBoats || checkShipDead(ship))
-                ship.show(this, false);
-        }
-        if (this.activeShip == null)
-            return;
-        if (getCellAtMousePos() != null)
-            activeShip.setPosition(getCellAtMousePos().getConvertedX(), getCellAtMousePos().getConvertedY());
-        activeShip.show(this, true);
+        renderer.render(cells, shipManager.getSetShips(), shipManager.getActiveShip(), 
+                       showBoats, r, g, b, logic);
     }
 
+    /**
+     * Displays the board with default highlighting using the board's theme colors.
+     * AFTER: Delegates to BoardRenderer component.
+     */
     public void show(boolean showBoats) {
-        for (Cell cell : this.cells)
-            cell.show();
-        if (getCellAtMousePos() != null)
-            getCellAtMousePos().show(r, g, b, 100);
-        if (showBoats)
-            for (Ship ship : setShips) {
-                ship.show(this, false);
-            }
-        if (this.activeShip == null)
-            return;
-        if (getCellAtMousePos() != null)
-            activeShip.setPosition(getCellAtMousePos().getConvertedX(), getCellAtMousePos().getConvertedY());
-        activeShip.show(this, true);
+        renderer.render(cells, shipManager.getSetShips(), shipManager.getActiveShip(), 
+                       showBoats, logic);
     }
 
+    /**
+     * Handles a click attempt on the board.
+     * AFTER: Delegates to BoardLogic component.
+     */
     public Cell tryClick() {
-        return getCellAtMousePos();
+        return logic.getCellAtMousePos(cells);
     }
 
+    /**
+     * Rotates the currently active ship by 90 degrees.
+     * AFTER: Delegates to ShipManager component.
+     */
     public void rotateActiveShip() {
-        if(this.activeShip == null){
-            return;
-        }
-        activeShip.rotateShip();
+        shipManager.rotateActiveShip();
     }
 
+    /**
+     * Places the currently active ship on the board and moves to the next ship.
+     * AFTER: Delegates to ShipManager component.
+     */
     public void setActiveShip() {
-        if(this.activeShip == null){
-            return;
-        }
-        this.setShips.add(this.activeShip);
-        if(!unsetShips.isEmpty()) {
-            this.activeShip = this.unsetShips.removeFirst();
-        } else {
-            this.activeShip = null;
-        }
+        shipManager.setActiveShip();
     }
 
+    /**
+     * Gets the list of ships that have been placed on the board.
+     * AFTER: Delegates to ShipManager component.
+     */
     public ArrayList<Ship> getSetShips() {
-        return setShips;
+        return shipManager.getSetShips();
     }
 
+    /**
+     * Gets the list of ships that haven't been placed yet.
+     * AFTER: Delegates to ShipManager component.
+     */
     public ArrayList<Ship> getUnsetShips() {
-        return unsetShips;
+        return shipManager.getUnsetShips();
     }
 
+    /**
+     * Gets the currently active ship being placed.
+     * AFTER: Delegates to ShipManager component.
+     */
     public Ship getActiveShip() {
-        return activeShip;
+        return shipManager.getActiveShip();
     }
 
+    /**
+     * Checks if all ships have been placed on the board.
+     * AFTER: Delegates to ShipManager component.
+     */
     public boolean isAllShipsSet() {
-        return unsetShips.isEmpty() && activeShip == null;
+        return shipManager.isAllShipsSet();
     }
 
+    /**
+     * Converts the board from setup mode to gameplay mode.
+     * AFTER: Delegates to BoardLogic component and updates local state.
+     */
     public void convertToTurnBoard() {
-        for(Cell cell : this.cells) {
-            boolean hit = false;
-            for(Ship ship : this.setShips) {
-                for(ShipBlock block : ship.getBlocks()) {
-                    if(cell.getConvertedX() == block.getAbsoluteX(ship.getX()) && cell.getConvertedY() == block.getAbsoluteY(ship.getY())) {
-                        this.formattedCells.add(new ShipCell(qs, cell.size, cell.x, cell.y));
-                        hit = true;
-                        amtShipCells++;
-                    }
-                }
-            }
-            if (!hit) {
-                formattedCells.add(new WaterCell(qs, cell.size, cell.x, cell.y));
-            }
-        }
-
+        amtShipCells = logic.convertToTurnBoard(cells, shipManager.getSetShips(), formattedCells);
         this.cells = this.formattedCells;
     }
 
+    /**
+     * Checks if a ship has been completely destroyed (all blocks hit).
+     * AFTER: Delegates to BoardLogic component.
+     */
     public boolean checkShipDead(Ship ship) {
-        for (ShipBlock block : ship.getBlocks()) {
-            if (!(getCellAt(block.getAbsoluteX(ship.getX()), block.getAbsoluteY(ship.getY())).isHit()))
-                return false;
-        }
-        return true;
+        return logic.checkShipDead(ship, cells);
     }
 
+    /**
+     * Gets the red component of the board's color theme.
+     * AFTER: Delegates to BoardRenderer component.
+     */
     public int getR() {
-        return r;
+        return renderer.getR();
     }
 
+    /**
+     * Gets the green component of the board's color theme.
+     * AFTER: Delegates to BoardRenderer component.
+     */
     public int getG() {
-        return g;
+        return renderer.getG();
     }
 
+    /**
+     * Gets the blue component of the board's color theme.
+     * AFTER: Delegates to BoardRenderer component.
+     */
     public int getB() {
-        return b;
+        return renderer.getB();
+    }
+
+    /**
+     * Gets the number of ship cells on the board (used for win condition).
+     * AFTER: Simple getter for game state tracking.
+     */
+    public int getAmtShipCells() {
+        return amtShipCells;
     }
 }
